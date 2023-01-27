@@ -1,0 +1,52 @@
+.common {
+  &__image {
+    width: auto !important;
+    height: 8rem !important;
+    object-fit: contain !important;
+  }
+
+  &__input {
+    font-size: smaller;
+    border: 1px solid black;
+
+    padding: 0.5rem;
+
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  &__error {
+    &__message {
+      color: rgb(255, 0, 0);
+      font-size: smaller;
+    }
+  }
+  &__outline {
+    &__none {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+  &__pagination {
+    &__button {
+      background-color: black;
+      border: 1px solid black;
+      color: white;
+      border-radius: 0.2rem;
+    }
+  }
+}
+
+.cursor {
+  &__pointer {
+    cursor: pointer;
+  }
+}
+
+.fs {
+  &-7 {
+    font-size: smaller;
+  }
+  &-8 {
+    font-size: x-small;
+  }
+}

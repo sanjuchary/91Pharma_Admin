@@ -1,0 +1,57 @@
+
+
+.layout {
+    &__public {
+        height: 100vh;
+        background-color: aliceblue;
+        &__header {
+            // purple
+            background-color: #7f00ff;
+            color: rgb(242, 242, 242);
+            p {
+                font-size: smaller;
+            }
+        }
+        &__wrapper {
+            height: 80vh;
+            &__content {
+                min-height: 40vh;
+            }
+        }
+    }
+
+    &__admin {
+        &__content {
+            height: 100vh;
+            background-color: #f2f2f2;
+
+        }
+    }
+
+    &__sidebar {
+        height: 100vh;
+        ::selection { background: transparent; }
+        ::-moz-selection { background: transparent; }
+        &__item {
+            &__header {
+                &:hover {
+                    color: black;
+                    background-color: #bbbbbb;
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+// mobile css
+@media only screen and (max-width: 768px) {
+    .layout {
+        &__admin {
+            &__sidebar {
+                z-index: 999;
+                position: fixed;
+            }
+        }
+    }
+}
