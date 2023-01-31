@@ -90,6 +90,15 @@ const Doctor = () => {
       value: "",
       customClass: "col-12",
     },
+    //image
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "upload profile image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (

@@ -72,7 +72,7 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
         <Form
           values={values}
           schema={schema}
-          isMultiPart={false}
+          isMultiPart={true}
           api={{
             get: { method: "get", url: `/filters/${id}` },
             update: { method: "patch", url: `/filters/${id}` },
