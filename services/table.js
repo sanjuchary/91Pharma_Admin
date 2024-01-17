@@ -1,4 +1,4 @@
-import axios from "../utils/axios";
+import axios from "axios";
 
 const TableService = (url, page, limit) => {
   return axios

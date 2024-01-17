@@ -1,10 +1,11 @@
-import axios from "../utils/axios";
+// import axios from "../utils/axios";
+import axios from "axios";
 import Router from "next/router";
 import { getCookie, setCookies } from "cookies-next";
 
 const loginService = async (data) => {
   return await axios
-    .post("/auth/admin/login", data)
+    .post(`http://localhost:4000/api/v1/users/signin`, data)
     .then((res) => {
       let response = res.data;
       let message = "";
@@ -12,7 +13,7 @@ const loginService = async (data) => {
         message = response.message;
       }
       setCookies("token", response.token);
-      setCookies("refresh_token", response.refresh_token);
+      // setCookies("refresh_token", response.refresh_token);
       setCookies("user_name", response.userName);
 
       // get search params

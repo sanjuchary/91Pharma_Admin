@@ -38,6 +38,7 @@ const Home = () => {
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     handleStatus(true, null, null);
     loginService(data)
       .then((res) => {
@@ -87,7 +88,7 @@ const Home = () => {
               type="submit"
               disabled={status.isLoading}
             >
-              {status.isLoading ? "Loading..." : "Login"}
+              {status.isLoading ? "Loading..." : "login"}
             </button>
           </div>
         </Form>

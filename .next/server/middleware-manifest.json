@@ -1,0 +1,25 @@
+{
+  "sortedMiddleware": [
+    "/a"
+  ],
+  "clientInfo": [
+    [
+      "/a",
+      false
+    ]
+  ],
+  "middleware": {
+    "/a": {
+      "env": [],
+      "wasm": [],
+      "files": [
+        "server/middleware-runtime.js",
+        "server/pages/a/_middleware.js"
+      ],
+      "name": "pages/a/_middleware",
+      "page": "/a",
+      "regexp": "^/a(?:(/.*)?)$"
+    }
+  },
+  "version": 1
+}

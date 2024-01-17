@@ -67,7 +67,7 @@ const Index = () => {
       />
       <Table
         columns={columns}
-        url="/products"
+        url="http://localhost:3000/api/v1/product/get-all"
         buttons={buttons}
         title="Products"
       />

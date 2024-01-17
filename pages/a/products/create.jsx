@@ -94,14 +94,6 @@ const Product = ({ filters, brands }) => {
       isSingle: true,
     },
     {
-      name: "video",
-      label: "Video",
-      type: "file",
-      placeholder: "Select Product video",
-      value: "",
-      isSingle: true,
-    },
-    {
       name: "category_id",
       label: "Select Category",
       type: "select",
@@ -119,6 +111,38 @@ const Product = ({ filters, brands }) => {
       defaultValue: null,
       options: brands,
       isMulti: false,
+    },
+    {
+      name: "composition",
+      label: "Composition",
+      type: "text",
+      placeholder: "Enter Product composition",
+      value: "",
+      customClass: "col-12",
+    },
+    {
+      name: "packing_type",
+      label: "Packing Type",
+      type: "text",
+      placeholder: "Enter Product Packing type",
+      value: "",
+      customClass: "col-12",
+    },
+    {
+      name: "packing_size",
+      label: "Packing Size",
+      type: "text",
+      placeholder: "Enter Product Packing Size",
+      value: "",
+      customClass: "col-12",
+    },
+    {
+      name: "schedule",
+      label: "Schedule",
+      type: "text",
+      placeholder: "Enter Product Schedule",
+      value: "",
+      customClass: "col-12",
     },
     {
       name: "usage",
@@ -306,24 +330,12 @@ const Product = ({ filters, brands }) => {
         isMultiPart={true}
         redirectUrl="/a/products"
         api={{
-          update: { method: "post", url: `/products` },
+          update: { method: "post", url: `/product/add` },
         }}
       />
     </div>
   );
 };
-export async function getServerSideProps(context) {
-  const [filters, brands] = await Promise.all([
-    await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
-    await getOptions("brands"),
-  ]);
-  console.log({ filters });
-  return {
-    props: {
-      filters,
-      brands,
-    },
-  };
-}
+
 Product.layout = "Admin";
 export default Product;

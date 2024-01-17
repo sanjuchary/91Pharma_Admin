@@ -7,7 +7,7 @@ const instance = axios.create();
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // add baseURL to axios
-instance.defaults.baseURL = API_URL;
+// instance.defaults.baseURL = API_URL;
 
 // Add a request interceptor
 const token = getCookie("token", {
