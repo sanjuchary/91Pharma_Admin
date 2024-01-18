@@ -15,7 +15,7 @@ const loginService = async (data) => {
       setCookies("token", response.token);
       // setCookies("refresh_token", response.refresh_token);
       setCookies("user_name", response.userName);
-
+      localStorage.setItem("token", response.token);
       // get search params
       let searchParams = new URLSearchParams(window.location.search);
       let redirect = searchParams.get("redirect");

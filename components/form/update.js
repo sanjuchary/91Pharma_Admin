@@ -3,8 +3,9 @@ import { Form } from "reactstrap";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SweetAlert from "../common/SweetAlert";
-import axios from "../../utils/axios";
+// import axios from "../../utils/axios";
 import Select from "react-select";
+import axios from "axios";
 
 import Router from "next/router";
 
@@ -42,106 +43,145 @@ const Update = (props) => {
   const onRedirect = (url) => {
     Router.push(url);
   };
+  // const onSubmit = (e) => {
+  //   // if (props.isMultiPart) {
+  //   //   let formData = new FormData();
+
+  //   //   props.values.forEach((value, index) => {
+  //   //     console.log(value.name);
+  //   //     if (value.name === "image") {
+  //   //       if (e[value.name]) {
+  //   //         if (value.isSingle) {
+  //   //           formData.append(value.name, e[value.name][0]);
+  //   //         } else {
+  //   //           formData.append(value.name, e[value.name]);
+  //   //         }
+  //   //       }
+  //   //     } else {
+  //   //       e[value.name] = e[value.name] === undefined ? null : e[value.name];
+  //   //       formData.append(value.name, e[value.name]);
+  //   //     }
+  //   //   });
+  //   //   console.log(formData);
+  //   //   axios({
+  //   //     method: props.api.update.method,
+  //   //     url: "http://localhost:4000/api/v1" + props.api.update.url,
+  //   //     data: formData,
+  //   //     headers: {
+  //   //       "Content-Type": "application/x-www-form-urlencoded",
+  //   //     },
+  //   //   })
+  //   //     .then((res) => {
+  //   //       handleSweetAlert(
+  //   //         true,
+  //   //         "Success",
+  //   //         res?.data?.message || "updated Successfully",
+  //   //         "success"
+  //   //       );
+  //   //     })
+  //   //     .catch((err) => {
+  //   //       handleSweetAlert(
+  //   //         true,
+  //   //         "Error",
+  //   //         err?.response?.data?.message,
+  //   //         "error"
+  //   //       );
+  //   //       console.log(err);
+  //   //     });
+  //   // } else {
+  //   //   axios({
+  //   //     method: props.api.update.method,
+  //   //     url: props.api.update.url,
+  //   //     data: e,
+  //   //   })
+  //   //     .then((res) => {
+  //   //       handleSweetAlert(
+  //   //         true,
+  //   //         "Success",
+  //   //         res ? res.data?.message : "updated Successfully",
+  //   //         "success"
+  //   //       );
+  //   //     })
+  //   //     .catch((err) => {
+  //   //       console.log(err);
+  //   //       if (err.response.status === 400) {
+  //   //         handleSweetAlert(
+  //   //           true,
+  //   //           "Warning",
+  //   //           err.response.data.message,
+  //   //           "warning"
+  //   //         );
+  //   //       } else {
+  //   //         handleSweetAlert(
+  //   //           true,
+  //   //           "Error",
+  //   //           err?.response?.data?.message,
+  //   //           "error"
+  //   //         );
+  //   //       }
+  //   //     });
+  //   // }
+  //   // console.log(e["name"]);
+  //   let formData = new FormData();
+
+  //   formData.append("name", e["name"]);
+  //   formData.append("product_id", e["product_id"]);
+  //   formData.append("discount", e["discount"]);
+  //   formData.append("price", e["price"]);
+  //   formData.append("igst", e["igst"]);
+  //   formData.append("description", e["description"]);
+  //   formData.append("hsn", e["hsn"]);
+  //   formData.append("quantity", e["quantity"]);
+  //   formData.append("context", e["context"]);
+  //   formData.append("composition", e["composition"]);
+
+  //   axios({
+  //     method: props.api.update.method,
+  //     url: "http://localhost:4000/api/v1" + props.api.update.url,
+  //     data: formData,
+  //     headers: {
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //     },
+  //   })
+  //     .then((res) => {
+  //       handleSweetAlert(
+  //         true,
+  //         "Success",
+  //         res?.data?.message || "updated Successfully",
+  //         "success"
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
+  //       console.log(err);
+  //     });
+  // };
+
   const onSubmit = (e) => {
-    // if (props.isMultiPart) {
-    //   let formData = new FormData();
-
-    //   props.values.forEach((value, index) => {
-    //     console.log(value.name);
-    //     if (value.name === "image") {
-    //       if (e[value.name]) {
-    //         if (value.isSingle) {
-    //           formData.append(value.name, e[value.name][0]);
-    //         } else {
-    //           formData.append(value.name, e[value.name]);
-    //         }
-    //       }
-    //     } else {
-    //       e[value.name] = e[value.name] === undefined ? null : e[value.name];
-    //       formData.append(value.name, e[value.name]);
-    //     }
-    //   });
-    //   console.log(formData);
-    //   axios({
-    //     method: props.api.update.method,
-    //     url: "http://localhost:4000/api/v1" + props.api.update.url,
-    //     data: formData,
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //     },
-    //   })
-    //     .then((res) => {
-    //       handleSweetAlert(
-    //         true,
-    //         "Success",
-    //         res?.data?.message || "updated Successfully",
-    //         "success"
-    //       );
-    //     })
-    //     .catch((err) => {
-    //       handleSweetAlert(
-    //         true,
-    //         "Error",
-    //         err?.response?.data?.message,
-    //         "error"
-    //       );
-    //       console.log(err);
-    //     });
-    // } else {
-    //   axios({
-    //     method: props.api.update.method,
-    //     url: props.api.update.url,
-    //     data: e,
-    //   })
-    //     .then((res) => {
-    //       handleSweetAlert(
-    //         true,
-    //         "Success",
-    //         res ? res.data?.message : "updated Successfully",
-    //         "success"
-    //       );
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       if (err.response.status === 400) {
-    //         handleSweetAlert(
-    //           true,
-    //           "Warning",
-    //           err.response.data.message,
-    //           "warning"
-    //         );
-    //       } else {
-    //         handleSweetAlert(
-    //           true,
-    //           "Error",
-    //           err?.response?.data?.message,
-    //           "error"
-    //         );
-    //       }
-    //     });
-    // }
-    // console.log(e["name"]);
-    let formData = new FormData();
-
-    formData.append("name", e["name"]);
-    formData.append("product_id", e["product_id"]);
-    formData.append("discount", e["discount"]);
-    formData.append("price", e["price"]);
-    formData.append("igst", e["igst"]);
-    formData.append("description", e["description"]);
-    formData.append("hsn", e["hsn"]);
-    formData.append("quantity", e["quantity"]);
-    formData.append("context", e["context"]);
-    formData.append("composition", e["composition"]);
-
-    axios({
-      method: props.api.update.method,
-      url: "http://localhost:4000/api/v1" + props.api.update.url,
-      data: formData,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
+    console.log(e);
+    console.log(e["form_type"]);
+    // axios({
+    //   method: props.api.update.method,
+    //   url: "http://localhost:4000/api/v1" + props.api.update.url,
+    //   data: {
+    //     form_type: e["form_type"],
+    //   },
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //   },
+    // })
+    axios
+      .post(
+        "http://localhost:4000/api/v1" + props.api.update.url,
+        {
+          form_type: e["form_type"],
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         handleSweetAlert(
           true,
@@ -155,6 +195,7 @@ const Update = (props) => {
         console.log(err);
       });
   };
+
   const getData = () => {
     axios
       .get("http://localhost:3000/api/v1/product/get-all")

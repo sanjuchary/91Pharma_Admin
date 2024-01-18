@@ -76,6 +76,22 @@ const Sidebar = (props) => {
       ],
     },
     {
+      name: "Form Types",
+      icon: "bx bx-capsule",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Form Type",
+          url: "/a/form-types/create",
+        },
+        {
+          name: "Products",
+          url: "/a/products",
+        },
+      ],
+    },
+    {
       name: "Orders",
       icon: "bx bx-shopping-bag",
       url: "/a/orders",
