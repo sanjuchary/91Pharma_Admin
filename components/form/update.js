@@ -198,13 +198,17 @@ const Update = (props) => {
 
   const getData = () => {
     axios
-      .get("http://localhost:3000/api/v1/product/get-all")
+      .get("http://localhost:4000/api/v1" + props.api.get.url, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         let response = res.data;
         setData(response);
         let formData = {};
         props.values.map((value) => {
-          formData[value.name] = response[value.name];
+          formData[value.name] = response.data[value.name];
         });
         reset(formData);
         props.values.map((value) => {

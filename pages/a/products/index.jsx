@@ -37,7 +37,7 @@ const Index = () => {
           <Link
             href={{
               pathname: "/a/products/[id]",
-              query: { id: item.uuid },
+              query: { id: item.id },
             }}
           >
             <a className="btn btn-dark btn-sm">View Details</a>
@@ -67,7 +67,7 @@ const Index = () => {
       />
       <Table
         columns={columns}
-        url="http://localhost:3000/api/v1/product/get-all"
+        url="http://localhost:4000/api/v1/product/get-all"
         buttons={buttons}
         title="Products"
       />

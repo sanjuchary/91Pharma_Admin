@@ -7,6 +7,9 @@ const TableService = (url, page, limit) => {
         page: page,
         limit: limit,
       },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     })
     .then((res) => {
       return res;

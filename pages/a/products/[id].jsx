@@ -341,7 +341,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
           isMultiPart={true}
           redirectUrl="/a/products"
           api={{
-            get: { method: "get", url: `/products/${id}` },
+            get: { method: "get", url: `/product/get-all?id=${id}` },
             update: { method: "patch", url: `/products/${id}` },
           }}
         />
@@ -351,31 +351,31 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+// export async function getServerSideProps(context) {
+//   const { id } = context.query;
 
-  const [data, filters, brands] = await Promise.all([
-    await axios.get(`/products/${id}`),
-    await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
-    await getOptions("brands"),
-  ]);
-  // const defaultFilter
-  let defaultFilter = data.data.filters.map((row) => {
-    return { value: row.id, label: row.name };
-  })[0];
-  let defaultBrand = data.data.brand;
-  defaultBrand = { value: defaultBrand.uuid, label: defaultBrand.name };
+//   const [data, filters, brands] = await Promise.all([
+//     await axios.get(`/products/${id}`),
+//     await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
+//     await getOptions("brands"),
+//   ]);
+//   // const defaultFilter
+//   let defaultFilter = data.data.filters.map((row) => {
+//     return { value: row.id, label: row.name };
+//   })[0];
+//   let defaultBrand = data.data.brand;
+//   defaultBrand = { value: defaultBrand.uuid, label: defaultBrand.name };
 
-  return {
-    props: {
-      filters,
-      brands,
-      defaultFilter,
-      defaultBrand,
-      images: data.data.images,
-    },
-  };
-}
+//   return {
+//     props: {
+//       filters,
+//       brands,
+//       defaultFilter,
+//       defaultBrand,
+//       images: data.data.images,
+//     },
+//   };
+// }
 
 Product.layout = "Admin";
 export default Product;
