@@ -158,21 +158,10 @@ const Update = (props) => {
   // };
 
   const onSubmit = (e) => {
-    console.log(e);
-    console.log(e["form_type"]);
-    // axios({
-    //   method: props.api.update.method,
-    //   url: "http://localhost:4000/api/v1" + props.api.update.url,
-    //   data: {
-    //     form_type: e["form_type"],
-    //   },
-    //   headers: {
-    //     "Content-Type": "application/x-www-form-urlencoded",
-    //   },
-    // })
+    //add form types
     axios
       .post(
-        "http://localhost:4000/api/v1" + props.api.update.url,
+        "http://localhost:8000/api/v1" + props.api.update.url,
         {
           form_type: e["form_type"],
         },

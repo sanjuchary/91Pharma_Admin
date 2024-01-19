@@ -24,7 +24,7 @@ const Coupon = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Coupons", url: "/a/form-types" },
+          { text: "Create Form type", url: "/a/form-types" },
         ]}
       />
 

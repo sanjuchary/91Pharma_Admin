@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const TableService = (url, page, limit) => {
-  return axios
+const TableService = async (url, page, limit) => {
+  return await axios
     .get(url, {
       params: {
         page: page,
-        limit: limit,
+        per_page: limit,
       },
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
     .then((res) => {
       return res;

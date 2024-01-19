@@ -15,11 +15,6 @@
     "static/development/_middlewareManifest.js"
   ],
   "pages": {
-    "/404": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/404.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -30,21 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/a/_middleware": [
+    "/a/products": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "server/middleware-runtime.js",
-      "server/pages/a/_middleware.js"
+      "static/chunks/pages/a/products.js"
     ],
-    "/a/dashboard": [
+    "/a/products/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/dashboard.js"
-    ],
-    "/a/form-types/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/form-types/create.js"
+      "static/chunks/pages/a/products/[id].js"
     ]
   },
   "ampFirstPages": []

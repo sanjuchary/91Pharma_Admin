@@ -86,8 +86,8 @@ const Sidebar = (props) => {
           url: "/a/form-types/create",
         },
         {
-          name: "Products",
-          url: "/a/products",
+          name: "Form Types",
+          url: "/a/form-types",
         },
       ],
     },
@@ -97,7 +97,12 @@ const Sidebar = (props) => {
       url: "/a/orders",
       show: false,
     },
-
+    {
+      name: "Shops",
+      icon: "bx bx-shopping-bag",
+      url: "/a/shops",
+      show: false,
+    },
     {
       name: "Users",
       icon: "bx bx-user",

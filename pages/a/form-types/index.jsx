@@ -6,17 +6,13 @@ const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     {
-      dataField: "id",
-      text: "Id",
+      dataField: "form_type",
+      text: "Form Type",
     },
-    {
-      dataField: "code",
-      text: "Code",
-    },
-    {
-      dataField: "discount",
-      text: "Discount",
-    },
+    // {
+    //   dataField: "discount",
+    //   text: "Discount",
+    // },
     {
       dataField: "createdAt",
       text: "Created At",
@@ -27,24 +23,24 @@ const Index = () => {
       text: "Updated At",
       type: "datetime",
     },
-    {
-      dataField: null,
-      text: "Actions",
-      type: "render",
-      render: (item) => (
-        <div>
-          <Link href={`/a/coupons/${item.uuid}`}>
-            <a className="btn btn-dark btn-sm">View Details</a>
-          </Link>
-        </div>
-      ),
-    },
+    // {
+    //   dataField: null,
+    //   text: "Actions",
+    //   type: "render",
+    //   render: (item) => (
+    //     <div>
+    //       <Link href={`/a/form-types/${item.uuid}`}>
+    //         <a className="btn btn-dark btn-sm">View Details</a>
+    //       </Link>
+    //     </div>
+    //   ),
+    // },
   ];
 
   const buttons = [
     {
       text: "Add Coupon",
-      url: "/a/coupons/create",
+      url: "/a/form-types/create",
       color: "dark",
       type: "button",
       size: "sm",
@@ -56,15 +52,15 @@ const Index = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Coupons", url: "/a/coupons" },
+          { text: "Form types", url: "/a/form-types" },
         ]}
       />
 
       <Table
         columns={columns}
-        url="/coupons"
+        url="http://localhost:8000/api/v1/form-type/get-all"
         buttons={buttons}
-        title="Coupons"
+        title="Form Types"
       />
     </div>
   );

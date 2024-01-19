@@ -1,8 +1,11 @@
+import { useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 
 const Index = () => {
+  const [productData, setProductData] = useState(null);
+
   const columns = [
     { dataField: "serial_number", text: "S.N." },
 
@@ -37,7 +40,7 @@ const Index = () => {
           <Link
             href={{
               pathname: "/a/products/[id]",
-              query: { id: item.uuid },
+              query: { id: item.id },
             }}
           >
             <a className="btn btn-dark btn-sm">View Details</a>
@@ -67,7 +70,7 @@ const Index = () => {
       />
       <Table
         columns={columns}
-        url="http://localhost:3000/api/v1/product/get-all"
+        url="http://localhost:8000/api/v1/product/get-all"
         buttons={buttons}
         title="Products"
       />
