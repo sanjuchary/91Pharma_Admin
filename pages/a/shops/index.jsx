@@ -36,8 +36,8 @@ const Index = () => {
         <div>
           <Link
             href={{
-              pathname: "/a/shop-details/get-all/[id]",
-              query: { id: item.uuid },
+              pathname: "/a/shops/[id]",
+              query: { id: item.id },
             }}
           >
             <a className="btn btn-dark btn-sm">View Details</a>

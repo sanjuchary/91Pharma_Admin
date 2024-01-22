@@ -187,13 +187,17 @@ const Update = (props) => {
 
   const getData = () => {
     axios
-      .get("http://localhost:3000/api/v1/product/get-all")
+      .get("http://localhost:8000/api/v1" + props.api.get.url, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         let response = res.data;
         setData(response);
         let formData = {};
         props.values.map((value) => {
-          formData[value.name] = response[value.name];
+          formData[value.name] = response.data[value.name];
         });
         reset(formData);
         props.values.map((value) => {
@@ -229,7 +233,7 @@ const Update = (props) => {
           if (sweetAlert.type === "success" && props.redirectUrl) {
             onRedirect(props.redirectUrl);
           } else if (sweetAlert.type === "success") {
-            getData();
+            // getData();
             handleSweetAlert(false);
           } else {
             handleSweetAlert(false);

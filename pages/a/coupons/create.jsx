@@ -69,16 +69,17 @@ const Coupon = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Coupons", url: "/a/coupons" },
+          { text: "Coupons", url: "/a/coupon" },
         ]}
       />
 
       <Form
         values={values}
         schema={schema}
-        isMultiPart={false}
+        isMultiPart={true}
+        redirectUrl="/a/coupons"
         api={{
-          update: { method: "post", url: `/coupons/` },
+          update: { method: "post", url: `/coupon/add` },
         }}
       />
     </div>

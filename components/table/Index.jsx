@@ -61,10 +61,6 @@ const Table = (props) => {
     handleData();
   }, [page, limit]);
 
-  useEffect(() => {
-    handleData();
-  }, []);
-
   return (
     <div className="common__table mt-5">
       <div className="p-2">

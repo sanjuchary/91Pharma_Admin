@@ -6,16 +6,16 @@ const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     {
-      dataField: "id",
-      text: "Id",
-    },
-    {
       dataField: "code",
       text: "Code",
     },
     {
       dataField: "discount",
-      text: "Discount",
+      text: "Discount(%)",
+    },
+    {
+      dataField: "expiry_date",
+      text: "Validity",
     },
     {
       dataField: "createdAt",
@@ -44,7 +44,7 @@ const Index = () => {
   const buttons = [
     {
       text: "Add Coupon",
-      url: "/a/coupons/create",
+      url: "/a/coupon/add",
       color: "dark",
       type: "button",
       size: "sm",
@@ -56,13 +56,13 @@ const Index = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Coupons", url: "/a/coupons" },
+          { text: "Coupons", url: "/a/coupon/all" },
         ]}
       />
 
       <Table
         columns={columns}
-        url="/coupons"
+        url="http://localhost:8000/api/v1/coupon/all"
         buttons={buttons}
         title="Coupons"
       />
