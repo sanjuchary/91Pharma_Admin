@@ -25,15 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/a/coupons": [
+    "/a/credits/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/coupons.js"
+      "static/chunks/pages/a/credits/[id].js"
     ],
-    "/a/coupons/create": [
+    "/a/products/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/coupons/create.js"
+      "static/chunks/pages/a/products/[id].js"
     ]
   },
   "ampFirstPages": []

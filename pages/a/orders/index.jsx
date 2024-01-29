@@ -9,8 +9,9 @@ const Index = () => {
       text: "S.N.",
     },
 
-    { dataField: "order_id", text: "Order ID" },
-    { dataField: "total_amount", text: "Total Amount" },
+    { dataField: "id", text: "Order ID" },
+    { dataField: "amount", text: "Total Amount" },
+    { dataField: "status", text: "Status" },
     {
       dataField: "createdAt",
       text: "Created At",
@@ -48,7 +49,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url="/orders/admin"
+        url="http://localhost:8000/api/v1/order/all"
         buttons={buttons}
         title="Orders"
       />

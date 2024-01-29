@@ -17,21 +17,21 @@ const Index = () => {
       dataField: "description",
       text: "Description",
     },
-    {
-      dataField: "null",
-      text: "Parent",
-      type: "render",
-      render: (item) => {
-        if (item?.parent) {
-          return (
-            <Link href={`/a/brands/${item?.parent?.uuid}`}>
-              <a className="text-dark">{item?.parent?.name}</a>
-            </Link>
-          );
-        }
-        return "";
-      },
-    },
+    // {
+    //   dataField: "null",
+    //   text: "Parent",
+    //   type: "render",
+    //   render: (item) => {
+    //     if (item?.parent) {
+    //       return (
+    //         <Link href={`/a/brands/${item?.parent?.uuid}`}>
+    //           <a className="text-dark">{item?.parent?.name}</a>
+    //         </Link>
+    //       );
+    //     }
+    //     return "";
+    //   },
+    // },
     {
       dataField: "createdAt",
       text: "Created At",
@@ -75,7 +75,12 @@ const Index = () => {
         ]}
       />
 
-      <Table columns={columns} url="/brands" buttons={buttons} title="Brands" />
+      <Table
+        columns={columns}
+        url="http://localhost:8000/api/v1/product/get-all"
+        buttons={buttons}
+        title="Brands"
+      />
     </div>
   );
 };

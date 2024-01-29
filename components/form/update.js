@@ -233,7 +233,7 @@ const Update = (props) => {
           if (sweetAlert.type === "success" && props.redirectUrl) {
             onRedirect(props.redirectUrl);
           } else if (sweetAlert.type === "success") {
-            // getData();
+            getData();
             handleSweetAlert(false);
           } else {
             handleSweetAlert(false);

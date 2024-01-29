@@ -91,6 +91,28 @@ const Sidebar = (props) => {
         },
       ],
     },
+    // {
+    //   name: "Credit",
+    //   icon: "bx bx-capsule",
+    //   url: "",
+    //   show: false,
+    //   items: [
+    //     {
+    //       name: "Credits",
+    //       url: "/a/form-types/create",
+    //     },
+    //     {
+    //       name: "Form Types",
+    //       url: "/a/form-types",
+    //     },
+    //   ],
+    // },
+    {
+      name: "Credit",
+      icon: "bx bx-shopping-bag",
+      url: "/a/credits",
+      show: false,
+    },
     {
       name: "Orders",
       icon: "bx bx-shopping-bag",
@@ -135,7 +157,7 @@ const Sidebar = (props) => {
               </button>
             </div>
             <div className="d-flex justify-content-center mb-3">
-              <h5>PillBox</h5>
+              <h5>91_Pharma</h5>
             </div>
             {items.map((item, key) => (
               <div key={key} className="">
