@@ -64,7 +64,7 @@ const Index = () => {
       />
       <Table
         columns={columns}
-        url="http://localhost:8000/api/v1/shop-details/get-all"
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/shop-details/get-all`}
         buttons={buttons}
         title="Shops"
       />

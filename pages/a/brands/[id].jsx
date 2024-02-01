@@ -14,8 +14,8 @@ const Brand = ({ defaultValue, options }) => {
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    description: Yup.string().required("Description is required"),
-    context: Yup.string().required("Context is required"),
+    // description: Yup.string().required("Description is required"),
+    // context: Yup.string().required("Context is required"),
   });
 
   const values = [
@@ -27,38 +27,38 @@ const Brand = ({ defaultValue, options }) => {
       value: "",
       customClass: "col-12",
     },
-    {
-      name: "description",
-      label: "Description",
-      type: "text",
-      placeholder: "Enter brand description",
-      value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "context",
-      label: "Context",
-      type: "textarea",
-      placeholder: "Enter brand context",
-      value: "",
-    },
-    {
-      name: "parent_id",
-      label: "Parent Brand",
-      type: "select",
-      placeholder: "Select parent brand",
-      value: "",
-      options: options,
-      defaultValue: defaultValue,
-    },
-    {
-      name: "image",
-      label: "Image",
-      type: "file",
-      placeholder: "Enter brand image",
-      value: "",
-      isSingle: true,
-    },
+    // {
+    //   name: "description",
+    //   label: "Description",
+    //   type: "text",
+    //   placeholder: "Enter brand description",
+    //   value: "",
+    //   customClass: "col-12",
+    // },
+    // {
+    //   name: "context",
+    //   label: "Context",
+    //   type: "textarea",
+    //   placeholder: "Enter brand context",
+    //   value: "",
+    // },
+    // {
+    //   name: "parent_id",
+    //   label: "Parent Brand",
+    //   type: "select",
+    //   placeholder: "Select parent brand",
+    //   value: "",
+    //   options: options,
+    //   defaultValue: defaultValue,
+    // },
+    // {
+    //   name: "image",
+    //   label: "Image",
+    //   type: "file",
+    //   placeholder: "Enter brand image",
+    //   value: "",
+    //   isSingle: true,
+    // },
   ];
 
   return (
@@ -76,7 +76,7 @@ const Brand = ({ defaultValue, options }) => {
           schema={schema}
           isMultiPart={true}
           api={{
-            get: { method: "get", url: `/brands/${id}` },
+            get: { method: "get", url: `/brand/get/by/${id}` },
             update: { method: "patch", url: `/brands/${id}` },
           }}
         />
@@ -84,20 +84,20 @@ const Brand = ({ defaultValue, options }) => {
     </div>
   );
 };
-export async function getServerSideProps(context) {
-  const { id } = context.query;
+// export async function getServerSideProps(context) {
+//   const { id } = context.query;
 
-  const [defaultValue, options] = await Promise.all([
-    await getDefaultValue("brands", "parent", id),
-    await getOptions("brands", "name", "uuid", false),
-  ]);
+//   const [defaultValue, options] = await Promise.all([
+//     await getDefaultValue("brands", "parent", id),
+//     await getOptions("brands", "name", "uuid", false),
+//   ]);
 
-  return {
-    props: {
-      defaultValue: defaultValue,
-      options: options,
-    },
-  };
-}
+//   return {
+//     props: {
+//       defaultValue: defaultValue,
+//       options: options,
+//     },
+//   };
+// }
 Brand.layout = "Admin";
 export default Brand;

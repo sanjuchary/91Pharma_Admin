@@ -118,7 +118,7 @@ const Order = () => {
           schema={schema}
           isMultiPart={true}
           api={{
-            get: { method: "get", url: `/orders/${id}` },
+            get: { method: "get", url: `/order/all?id=${id}` },
             update: { method: "patch", url: `/orders/${id}` },
           }}
         />

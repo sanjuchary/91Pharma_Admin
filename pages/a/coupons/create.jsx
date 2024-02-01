@@ -78,6 +78,7 @@ const Coupon = () => {
         schema={schema}
         isMultiPart={true}
         redirectUrl="/a/coupons"
+        formType="coupon"
         api={{
           update: { method: "post", url: `/coupon/add` },
         }}

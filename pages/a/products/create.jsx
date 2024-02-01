@@ -2,9 +2,25 @@ import { useRouter } from "next/router";
 import * as Yup from "yup";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Form from "../../../components/form/update";
-import { getOptions } from "../../../helpers/common/dropdownHelper";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+// import { getOptions } from "../../../helpers/common/dropdownHelper";
 
-const Product = ({ filters, brands }) => {
+// const getOptions = async (tableName, label, val, isData, token) => {
+//   let selectListIdName = [];
+//   const arr = axios.get(
+//     "http://localhost:4000/api/v1" + `/${tableName}/get-all`,
+//     {
+//       headers: {
+//         Authorization: token,
+//       },
+//     }
+//   );
+//   console.log(arr);
+//   return arr;
+// };
+
+const Product = ({ categories, brands }) => {
   const router = useRouter();
 
   const schema = Yup.object().shape({
@@ -94,22 +110,32 @@ const Product = ({ filters, brands }) => {
       isSingle: true,
     },
     {
+      name: "brand_id",
+      label: "Select Brand",
+      type: "select",
+      placeholder: "Select Brand",
+      defaultValue: null,
+      options: brands.data,
+      isMulti: false,
+    },
+    {
       name: "category_id",
       label: "Select Category",
       type: "select",
       placeholder: "Select Category",
       defaultValue: null,
       value: "",
-      options: filters,
+      options: categories.data,
       isMulti: false,
     },
     {
-      name: "brand_id",
-      label: "Select Brand",
+      name: "sub_category_id",
+      label: "Select Sub Category",
       type: "select",
-      placeholder: "Select Brand",
+      placeholder: "Select Sub Category",
       defaultValue: null,
-      options: brands,
+      value: "",
+      options: [],
       isMulti: false,
     },
     {
@@ -331,11 +357,40 @@ const Product = ({ filters, brands }) => {
         redirectUrl="/a/products"
         api={{
           update: { method: "post", url: `/product/add` },
+          // get: { url: "/category/get-all" },
         }}
+        formType="products"
       />
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+
+  const categoriesResponse = await axios.get(
+    `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
+  const brandsResponse = await axios.get(
+    `${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
+  const categories = categoriesResponse.data?.data;
+  const brands = brandsResponse.data?.data;
+
+  return {
+    props: { categories, brands },
+  };
+}
 
 Product.layout = "Admin";
 export default Product;

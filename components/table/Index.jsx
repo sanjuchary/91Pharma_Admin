@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import moment from "moment";
-
+import { useRouter } from "next/router";
 // js
 import { TableService } from "../../services/table";
 
@@ -10,6 +10,7 @@ import Pagination from "./pagination";
 import Limit from "./Limit";
 
 const Table = (props) => {
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -18,6 +19,9 @@ const Table = (props) => {
     total_pages: 0,
     current_page: 0,
   });
+
+  const pathname = router.pathname;
+  console.log(pathname);
 
   const handleData = () => {
     TableService(props.url, page, limit)
@@ -28,6 +32,9 @@ const Table = (props) => {
           total_pages: response.total_pages,
           current_page: response.current_page,
         });
+        if (response?.message === "Applied Users For Credit Not Found") {
+          return setData([]);
+        }
         setData(response.data);
       })
       .catch((err) => {
@@ -66,10 +73,15 @@ const Table = (props) => {
       <div className="p-2">
         {/* START TABLE */}
         <div className="d-flex justify-content-between">
-          <p className="fs-7">
-            showing {data.length} out of {(stats && stats.total_rows) || 0} rows
-            ...
-          </p>
+          {
+            <p className="fs-7">
+              showing{" "}
+              {pathname === "/a/categories" || pathname === "/a/brands"
+                ? data?.data?.length
+                : data.length}{" "}
+              out of {(stats && stats.total_rows) || 0} rows ...
+            </p>
+          }
           <div className="d-inline-flex">
             {props.buttons.map((button, key) => (
               <Link key={key} href={button.url}>
@@ -94,15 +106,25 @@ const Table = (props) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, itemKey) => (
-                <tr className="border-bottom" key={itemKey}>
-                  {props.columns.map((column, columnKey) => (
-                    <td key={columnKey}>
-                      {handleValue(item, column, itemKey)}
-                    </td>
+              {pathname === "/a/categories" || pathname === "/a/brands"
+                ? data?.data?.map((item, itemKey) => (
+                    <tr className="border-bottom" key={itemKey}>
+                      {props.columns.map((column, columnKey) => (
+                        <td key={columnKey}>
+                          {handleValue(item, column, itemKey)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                : data.map((item, itemKey) => (
+                    <tr className="border-bottom" key={itemKey}>
+                      {props.columns.map((column, columnKey) => (
+                        <td key={columnKey}>
+                          {handleValue(item, column, itemKey)}
+                        </td>
+                      ))}
+                    </tr>
                   ))}
-                </tr>
-              ))}
             </tbody>
           </table>
         </div>

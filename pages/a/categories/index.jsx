@@ -44,7 +44,7 @@ const Index = () => {
       type: "render",
       render: (item) => (
         <div>
-          <Link href={`/a/categories/${item.uuid}`}>
+          <Link href={`/a/categories/${item.id}`}>
             <a className="btn btn-dark btn-sm">View Details</a>
           </Link>
         </div>
@@ -73,7 +73,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url="/filters/table"
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`}
         buttons={buttons}
         title="Categories"
       />

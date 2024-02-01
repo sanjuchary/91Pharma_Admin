@@ -53,7 +53,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url="http://localhost:8000/api/v1/users/applyCreditedUsers"
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/users/applyCreditedUsers`}
         buttons={buttons}
         title="Orders"
       />

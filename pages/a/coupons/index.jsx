@@ -62,7 +62,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url="http://localhost:8000/api/v1/coupon/all"
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/coupon/all`}
         buttons={buttons}
         title="Coupons"
       />

@@ -1,8 +1,15 @@
-import axios from "../../utils/axios";
+import axios from "axios";
 
 const getOptions = async (tableName, label, val, isData) => {
   let selectListIdName = [];
-  const arr = await axios.get(`/${tableName}`);
+  const arr = axios.get(
+    `${process.env.NEXT_PUBLIC_PROD_API_URL}` + `/${tableName}/get-all`,
+    {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    }
+  );
   let aLabel = label || "name";
   let aValue = val || "uuid";
   let data = isData ? arr.data : arr.data.data;
@@ -14,6 +21,7 @@ const getOptions = async (tableName, label, val, isData) => {
   });
   return selectListIdName;
 };
+
 const getDefaultValue = async (tableName, parent_name, id, label, val) => {
   const arr = await axios.get(`/${tableName}/${id}`);
   let aLabel = label || "name";

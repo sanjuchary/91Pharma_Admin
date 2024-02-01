@@ -48,7 +48,7 @@ const Index = () => {
       type: "render",
       render: (item) => (
         <div>
-          <Link href={`/a/brands/${item.uuid}`}>
+          <Link href={`/a/brands/${item.id}`}>
             <a className="btn btn-dark btn-sm">View Details</a>
           </Link>
         </div>
@@ -77,7 +77,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url="http://localhost:8000/api/v1/product/get-all"
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`}
         buttons={buttons}
         title="Brands"
       />

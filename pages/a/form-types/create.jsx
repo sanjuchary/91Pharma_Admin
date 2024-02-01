@@ -38,6 +38,7 @@ const Coupon = () => {
             url: `/form-type/add`,
           },
         }}
+        formType="form"
       />
     </div>
   );

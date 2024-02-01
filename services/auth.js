@@ -5,7 +5,7 @@ import { getCookie, setCookies } from "cookies-next";
 
 const loginService = async (data) => {
   return await axios
-    .post(`http://localhost:8000/api/v1/users/signin`, data)
+    .post(`${process.env.NEXT_PUBLIC_PROD_API_URL}/users/signin`, data)
     .then((res) => {
       let response = res.data;
       let message = "";
