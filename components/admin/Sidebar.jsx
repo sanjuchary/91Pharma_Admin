@@ -132,6 +132,12 @@ const Sidebar = (props) => {
       url: "/a/users",
       show: false,
     },
+    {
+      name: "Upload",
+      icon: "bx bx-user",
+      url: "/a/upload",
+      show: false,
+    },
   ]);
 
   const handleShow = (item) => {

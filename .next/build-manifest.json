@@ -36,20 +36,20 @@
       "server/middleware-runtime.js",
       "server/pages/a/_middleware.js"
     ],
-    "/a/categories": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/categories.js"
-    ],
-    "/a/categories/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/categories/create.js"
-    ],
     "/a/dashboard": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/a/dashboard.js"
+    ],
+    "/a/products": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/a/products.js"
+    ],
+    "/a/upload": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/a/upload.js"
     ]
   },
   "ampFirstPages": []
