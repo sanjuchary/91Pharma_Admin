@@ -44,6 +44,22 @@ const Sidebar = (props) => {
       ],
     },
     {
+      name: "Sub-Categories",
+      icon: "bx bx-category",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Sub-Category",
+          url: "/a/subCategories/create",
+        },
+        {
+          name: "Sub-Categories",
+          url: "/a/subCategories",
+        },
+      ],
+    },
+    {
       name: "Coupons",
       icon: "bx bxs-coupon",
       url: "",

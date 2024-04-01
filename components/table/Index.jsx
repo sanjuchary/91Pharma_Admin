@@ -106,7 +106,9 @@ const Table = (props) => {
               </tr>
             </thead>
             <tbody>
-              {pathname === "/a/categories" || pathname === "/a/brands"
+              {pathname === "/a/categories" ||
+              pathname === "/a/brands" ||
+              pathname === "/a/subCategories"
                 ? data?.data?.map((item, itemKey) => (
                     <tr className="border-bottom" key={itemKey}>
                       {props.columns.map((column, columnKey) => (
