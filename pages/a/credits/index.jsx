@@ -10,7 +10,7 @@ const Index = () => {
     },
 
     { dataField: "first_name", text: "Name" },
-    { dataField: "email", text: "Total Amount" },
+    { dataField: "email", text: "email" },
     {
       dataField: "createdAt",
       text: "Created At",

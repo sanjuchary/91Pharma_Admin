@@ -51,14 +51,14 @@ const Brand = ({ defaultValue, options }) => {
     //   options: options,
     //   defaultValue: defaultValue,
     // },
-    // {
-    //   name: "image",
-    //   label: "Image",
-    //   type: "file",
-    //   placeholder: "Enter brand image",
-    //   value: "",
-    //   isSingle: true,
-    // },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Enter brand image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (

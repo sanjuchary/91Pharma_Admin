@@ -78,7 +78,7 @@ const Table = (props) => {
               showing{" "}
               {pathname === "/a/categories" || pathname === "/a/brands"
                 ? data?.data?.length
-                : data.length}{" "}
+                : data?.length}{" "}
               out of {(stats && stats.total_rows) || 0} rows ...
             </p>
           }
@@ -118,7 +118,7 @@ const Table = (props) => {
                       ))}
                     </tr>
                   ))
-                : data.map((item, itemKey) => (
+                : data?.map((item, itemKey) => (
                     <tr className="border-bottom" key={itemKey}>
                       {props.columns.map((column, columnKey) => (
                         <td key={columnKey}>

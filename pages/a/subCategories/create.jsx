@@ -3,8 +3,9 @@ import * as Yup from "yup";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Form from "../../../components/form/update";
 import { getOptions } from "../../../helpers/common/dropdownHelper";
+import axios from "axios";
 
-const subCategory = ({ filters, types }) => {
+const subCategory = ({ categories }) => {
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     // image: Yup.mixed().required("Image is required"),
@@ -37,23 +38,24 @@ const subCategory = ({ filters, types }) => {
     //   options: types,
     // },
     {
-      name: "parent_id",
+      name: "category_id",
       label: "Select Parent Category",
       type: "select",
       placeholder: "Select Category",
       defaultValue: null,
       value: "",
-      options: filters,
+      options: categories.data,
+      isMulti: false,
     },
 
-    // {
-    //   name: "image",
-    //   label: "Image",
-    //   type: "file",
-    //   placeholder: "Upload Category image",
-    //   value: "",
-    //   isSingle: true,
-    // },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Upload SubCategory image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (
@@ -70,7 +72,7 @@ const subCategory = ({ filters, types }) => {
         schema={schema}
         isMultiPart={false}
         redirectUrl="/a/subCategories"
-        formType="category"
+        formType="subCategory"
         api={{
           update: { method: "post", url: `/sub-category/add` },
         }}
@@ -91,5 +93,24 @@ const subCategory = ({ filters, types }) => {
 //     },
 //   };
 // }
+
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+
+  const categoriesResponse = await axios.get(
+    `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
+  const categories = categoriesResponse.data?.data;
+
+  return {
+    props: { categories },
+  };
+}
+
 subCategory.layout = "Admin";
 export default subCategory;

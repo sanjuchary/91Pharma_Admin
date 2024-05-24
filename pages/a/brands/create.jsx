@@ -46,14 +46,14 @@ const Brand = ({ brands }) => {
     //   options: brands,
     // },
 
-    // {
-    //   name: "image",
-    //   label: "Image",
-    //   type: "file",
-    //   placeholder: "Upload brand image",
-    //   value: "",
-    //   isSingle: true,
-    // },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Upload Category image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (

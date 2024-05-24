@@ -1,25 +1,72 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Form } from "reactstrap";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SweetAlert from "../common/SweetAlert";
-// import axios from "../../utils/axios";
 import Select from "react-select";
 import axios from "axios";
-
 import Router from "next/router";
+import Image from "next/image";
 import {
   onSubmitAddBrand,
   onSubmitAddCategory,
   onSubmitAddCoupon,
   onSubmitAddForm,
   onSubmitAddProduct,
+  onSubmitAddSubCategory,
 } from "../../services/submitFunc";
 
 const Update = (props) => {
   const [data, setData] = useState({});
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subCategories, setSubCategories] = useState([]);
+  const [imageDataList, setImageDataList] = useState("");
+
+  const modifyURL = (url) => {
+    return url.replace(
+      "https://localhost/8000/api/v1//",
+      "http://localhost:4000/api/v1/"
+    );
+  };
+
+  const convertBlobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const fetchImages = useCallback(async (url) => {
+    try {
+      if (typeof url !== "string") {
+        console.error("Expected a string URL but got:", url);
+        return;
+      }
+      const response = await axios.get(modifyURL(url), {
+        responseType: "blob",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      const blob = response.data;
+      const base64Image = await convertBlobToBase64(blob);
+      setImageDataList(base64Image);
+      console.log("base", base64Image);
+      return base64Image;
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (data?.data?.document?.url) {
+      fetchImages(data?.data?.document?.url);
+    }
+  }, [data, fetchImages]);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -41,10 +88,6 @@ const Update = (props) => {
     }
   }, [selectedCategory]);
 
-  useEffect(() => {
-    console.log(subCategories);
-  }, [subCategories]);
-
   const [sweetAlert, setSweetAlert] = useState({
     show: false,
     title: "",
@@ -65,6 +108,7 @@ const Update = (props) => {
     resolver: yupResolver(props.schema),
     defaultValues: data,
   });
+
   const handleSweetAlert = (show, title, text, type) => {
     setSweetAlert({
       show: show || false,
@@ -73,6 +117,7 @@ const Update = (props) => {
       type: type || sweetAlert.type,
     });
   };
+
   const onRedirect = (url) => {
     Router.push(url);
   };
@@ -87,6 +132,9 @@ const Update = (props) => {
         break;
       case "category":
         onSubmitAddCategory(e, props, handleSweetAlert);
+        break;
+      case "subCategory":
+        onSubmitAddSubCategory(e, props, handleSweetAlert);
         break;
       case "brand":
         onSubmitAddBrand(e, props, handleSweetAlert);
@@ -113,6 +161,9 @@ const Update = (props) => {
         let formData = {};
         props.values.map((value) => {
           formData[value.name] = response.data[value.name];
+          if (value.label === "Image") {
+            formData[value.name] = response.data.document[value.name];
+          }
         });
         reset(formData);
         props.values.map((value) => {
@@ -124,7 +175,7 @@ const Update = (props) => {
               );
             } else {
               setValue(value.name, value.defaultValue.value);
-              console.log(value.name, value.defaultValue.value);
+              console.log("IMage", value.name, value.defaultValue.value);
             }
           }
         });
@@ -133,9 +184,12 @@ const Update = (props) => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     props?.api?.get?.url && getData();
   }, []);
+
+  console.log("data_Sub", data);
 
   return (
     <div>
@@ -164,7 +218,6 @@ const Update = (props) => {
             value.type === "select" ? (
               <div className={`form-group col-6 mt-2`} key={index}>
                 <label id={`form-element-${value.name}`}>{value.label}</label>
-
                 <Controller
                   name={value.name}
                   control={control}
@@ -187,9 +240,8 @@ const Update = (props) => {
                       onChange={(e) => {
                         if (value.name === "category_id") {
                           setSelectedCategory(e.value);
-                          // Clear sub-category value when main category changes
-                          field.onChange(null); // Set sub-category value to null
-                          setSubCategories([]); // Clear subCategories
+                          field.onChange(null);
+                          setSubCategories([]);
                         } else {
                           field.onChange(e);
                         }
@@ -231,11 +283,13 @@ const Update = (props) => {
                 <label id={`form-element-${value.name}`}>{value.label}</label>
                 <div className="row">
                   <div className="col-12">
-                    {data[value.name] && (
-                      <img
-                        src={data[value.name] ? data[value.name] : ""}
-                        alt={value.label}
-                        className="common__image"
+                    {imageDataList && (
+                      <Image
+                        src={imageDataList}
+                        alt="image"
+                        className="common_image"
+                        width={500}
+                        height={500}
                       />
                     )}
                     <input
@@ -244,7 +298,6 @@ const Update = (props) => {
                       name={value.name}
                       type={value.type}
                       placeholder={value.placeholder}
-                      defaultValue={data[value.name]}
                       {...register(value.name)}
                     />
                   </div>
@@ -265,7 +318,7 @@ const Update = (props) => {
                   name={value.name}
                   type={value.type}
                   placeholder={value.placeholder}
-                  defaultValue={data[value.name]}
+                  defaultValue={data?.data?.name}
                   {...register(value.name)}
                 />
                 <p className="text-danger mb-0">

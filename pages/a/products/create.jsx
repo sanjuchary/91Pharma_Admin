@@ -20,7 +20,7 @@ import { getCookie } from "cookies-next";
 //   return arr;
 // };
 
-const Product = ({ categories, brands }) => {
+const Product = ({ categories, brands, subCategories }) => {
   const router = useRouter();
 
   const schema = Yup.object().shape({
@@ -28,6 +28,8 @@ const Product = ({ categories, brands }) => {
     description: Yup.string().required("Description is required"),
     context: Yup.string().required("Context is required"),
   });
+
+  console.log("subCategr", subCategories.data);
 
   const values = [
     {
@@ -134,8 +136,7 @@ const Product = ({ categories, brands }) => {
       type: "select",
       placeholder: "Select Sub Category",
       defaultValue: null,
-      value: "",
-      options: [],
+      options: subCategories.data,
       isMulti: false,
     },
     {
@@ -384,11 +385,20 @@ export async function getServerSideProps(context) {
       },
     }
   );
+  const subCategoriesResponse = await axios.get(
+    `${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get-all`,
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
   const categories = categoriesResponse.data?.data;
   const brands = brandsResponse.data?.data;
+  const subCategories = subCategoriesResponse.data?.data;
 
   return {
-    props: { categories, brands },
+    props: { categories, brands, subCategories },
   };
 }
 

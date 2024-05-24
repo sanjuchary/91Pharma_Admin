@@ -75,6 +75,22 @@ const Brand = ({ defaultValue, options }) => {
       value: "",
       customClass: "col-md-6",
     },
+    {
+      name: "phone_number",
+      label: "Mobile Number",
+      type: "text",
+      placeholder: "Enter Mobile number",
+      value: "",
+      customClass: "col-md-6 col-12",
+    },
+    {
+      name: "phone_number",
+      label: "Shop Name",
+      type: "text",
+      placeholder: "Enter Mobile number",
+      value: "",
+      customClass: "col-md-6 col-12",
+    },
   ];
 
   return (
@@ -94,6 +110,7 @@ const Brand = ({ defaultValue, options }) => {
           redirectUrl="/a/credits"
           api={{
             get: { method: "get", url: `/users/getUser?id=${id}` },
+            // get: { method: "get", url: `/shop-details/get-all?id=${id}` },
             // update: { method: "patch", url: `/users/sanctionCredit` },
           }}
         />

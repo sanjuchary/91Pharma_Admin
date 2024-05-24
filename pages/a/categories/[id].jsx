@@ -7,6 +7,7 @@ import {
   getDefaultValue,
   getDefaultValueForType,
 } from "../../../helpers/common/dropdownHelper";
+import Image from "next/image";
 
 const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
   const router = useRouter();
@@ -14,7 +15,17 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    // type: Yup.string().required("Type is required"),
+    type: Yup.string().required("Type is required"),
+    file_name: Yup.mixed()
+      .required("A file is required")
+      .test("fileSize", "File too large", (value) => {
+        return value && value.size <= 2000000; // 2MB
+      })
+      .test("fileType", "Unsupported File Format", (value) => {
+        return (
+          value && ["image/jpeg", "image/png", "image/gif"].includes(value.type)
+        );
+      }),
   });
 
   const values = [
@@ -25,6 +36,14 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
       placeholder: "Enter category name",
       value: "",
       customClass: "col-12",
+    },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Enter category image",
+      value: "",
+      isSingle: true,
     },
     // {
     //   name: "id",
@@ -37,7 +56,7 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
     //   customClass: "col-12",
     // },
     // {
-    //   name: "image",
+    //   name: "document",
     //   label: "Image",
     //   type: "file",
     //   placeholder: "Enter categorie image",
@@ -68,6 +87,7 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
             // update: { method: "patch", url: `/filters/${id}` },
           }}
         />
+        // <Image src={}/>
       )}
     </div>
   );

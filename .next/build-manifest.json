@@ -31,20 +31,20 @@
       "server/middleware-runtime.js",
       "server/pages/a/_middleware.js"
     ],
-    "/a/subCategories": [
+    "/a/brands": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/subCategories.js"
+      "static/chunks/pages/a/brands.js"
     ],
-    "/a/subCategories/[id]": [
+    "/a/brands/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/subCategories/[id].js"
+      "static/chunks/pages/a/brands/[id].js"
     ],
-    "/a/subCategories/create": [
+    "/a/brands/create": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/subCategories/create.js"
+      "static/chunks/pages/a/brands/create.js"
     ]
   },
   "ampFirstPages": []

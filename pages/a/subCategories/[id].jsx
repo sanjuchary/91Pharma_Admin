@@ -17,6 +17,7 @@ const subCategory = ({
 }) => {
   const router = useRouter();
   const { id } = router.query;
+  console.log("subId", id);
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -32,24 +33,14 @@ const subCategory = ({
       value: "",
       customClass: "col-12",
     },
-    // {
-    //   name: "id",
-    //   label: "Select Parent Category",
-    //   type: "select",
-    //   placeholder: "Select category",
-    //   defaultValue: defaultValueFilter,
-    //   value: "",
-    //   options: filters,
-    //   customClass: "col-12",
-    // },
-    // {
-    //   name: "image",
-    //   label: "Image",
-    //   type: "file",
-    //   placeholder: "Enter categorie image",
-    //   value: "",
-    //   isSingle: true,
-    // },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Enter category image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (
@@ -69,7 +60,7 @@ const subCategory = ({
           api={{
             get: {
               method: "get",
-              url: `/sub-category/get/by${id}`,
+              url: `/sub-category/get/by/${id}`,
             },
             // update: { method: "patch", url: `/filters/${id}` },
           }}

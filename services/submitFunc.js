@@ -69,16 +69,112 @@ export const onSubmitAddForm = (e, props, handleSweetAlert) => {
     });
 };
 
+// export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
+//   axios
+//     .post(
+//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+//       {
+//         name: e["name"],
+//       },
+//       {
+//         headers: {
+//           Authorization: localStorage.getItem("token"),
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       handleSweetAlert(
+//         true,
+//         "Success",
+//         res?.data?.message || "updated Successfully",
+//         "success"
+//       );
+//     })
+//     .catch((err) => {
+//       handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
+//       console.log(err);
+//     });
+// };
+
 export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
+  const formData = new FormData();
+  formData.append("name", e["name"]);
+  if (e["image"]) {
+    formData.append("image", e["image"][0]); // Assuming image is a FileList
+  }
+
   axios
     .post(
       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      {
-        name: e["name"],
-      },
+      formData,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      handleSweetAlert(
+        true,
+        "Success",
+        res?.data?.message || "Updated Successfully",
+        "success"
+      );
+    })
+    .catch((err) => {
+      handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
+      console.log(err);
+    });
+};
+
+// export const onSubmitAddSubCategory = (e, props, handleSweetAlert) => {
+//   const id = typeof String(e["category_id"]);
+//   console.log("Values", id);
+//   axios
+//     .post(
+//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,formData
+//       {
+//         name: e["name"],
+//         category_id: String(e["category_id"]),
+//       },
+//       {
+//         headers: {
+//           Authorization: localStorage.getItem("token"),
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       handleSweetAlert(
+//         true,
+//         "Success",
+//         res?.data?.message || "updated Successfully",
+//         "success"
+//       );
+//     })
+//     .catch((err) => {
+//       handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
+//       console.log(err);
+//     });
+// };
+
+export const onSubmitAddSubCategory = (e, props, handleSweetAlert) => {
+  const formData = new FormData();
+  formData.append("name", e["name"]);
+  formData.append("category_id", String(e["category_id"]));
+  if (e["image"]) {
+    formData.append("image", e["image"][0]); // Assuming image is a FileList
+  }
+
+  axios
+    .post(
+      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+      formData,
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
         },
       }
     )
@@ -86,7 +182,7 @@ export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
       handleSweetAlert(
         true,
         "Success",
-        res?.data?.message || "updated Successfully",
+        res?.data?.message || "Updated Successfully",
         "success"
       );
     })
@@ -97,15 +193,20 @@ export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
 };
 
 export const onSubmitAddBrand = (e, props, handleSweetAlert) => {
+  const formData = new FormData();
+  formData.append("name", e["name"]);
+  if (e["image"]) {
+    formData.append("image", e["image"][0]); // Assuming image is a FileList
+  }
+
   axios
     .post(
       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      {
-        name: e["name"],
-      },
+      formData,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
         },
       }
     )
@@ -113,7 +214,7 @@ export const onSubmitAddBrand = (e, props, handleSweetAlert) => {
       handleSweetAlert(
         true,
         "Success",
-        res?.data?.message || "updated Successfully",
+        res?.data?.message || "Updated Successfully",
         "success"
       );
     })
