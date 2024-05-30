@@ -65,6 +65,14 @@ const Coupon = () => {
       value: "",
       customClass: "col-12",
     },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Enter category image",
+      value: "",
+      isSingle: true,
+    },
   ];
 
   return (
@@ -83,7 +91,7 @@ const Coupon = () => {
           isMultiPart={true}
           api={{
             get: { method: "get", url: `/coupons/${id}` },
-            update: { method: "patch", url: `/coupons/${id}` },
+            // update: { method: "patch", url: `/coupons/${id}` },
           }}
         />
       )}

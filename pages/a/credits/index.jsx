@@ -47,7 +47,7 @@ const Index = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Orders", url: "/a/credits" },
+          { text: "Credits", url: "/a/credits" },
         ]}
       />
 

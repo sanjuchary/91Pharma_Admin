@@ -200,6 +200,11 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
         >
           Images
         </button> */}
+        <div>
+          <h3>Total Orders(9)</h3>
+          <h3>Total Orders(0)</h3>
+          <h3>Available Balance ₹0</h3>
+        </div>
       </div>
 
       {tab === 0 && id != undefined && (

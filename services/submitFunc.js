@@ -45,7 +45,7 @@ export const onSubmitAddProduct = (e, props, handleSweetAlert) => {
 export const onSubmitAddForm = (e, props, handleSweetAlert) => {
   axios
     .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.get.url,
       {
         form_type: e["form_type"],
       },
@@ -224,21 +224,58 @@ export const onSubmitAddBrand = (e, props, handleSweetAlert) => {
     });
 };
 
+// export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
+//   axios
+//     .post(
+//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+//       {
+//         code: e["code"],
+//         discount: String(e["discount"]),
+//         min_value: String(e["min_value"]),
+//         max_value: String(e["max_value"]),
+//         max_amount: String(e["max_amount"]),
+//         expiry_date: String(e["expiry_date"]),
+//       },
+//       {
+//         headers: {
+//           Authorization: localStorage.getItem("token"),
+//         },
+//       }
+//     )
+//     .then((res) => {
+//       handleSweetAlert(
+//         true,
+//         "Success",
+//         res?.data?.message || "updated Successfully",
+//         "success"
+//       );
+//     })
+//     .catch((err) => {
+//       handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
+//       console.log(err);
+//     });
+// };
+
 export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
+  const formData = new FormData();
+  formData.append("code", e["code"]);
+  formData.append("discount", String(e["discount"]));
+  formData.append("min_value", String(e["min_value"]));
+  formData.append("max_value", String(e["max_value"]));
+  formData.append("max_amount", String(e["max_amount"]));
+  formData.append("expiry_date", String(e["expiry_date"]));
+  if (e["image"]) {
+    formData.append("image", e["image"][0]); // Assuming image is a FileList
+  }
+
   axios
     .post(
       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      {
-        code: e["code"],
-        discount: String(e["discount"]),
-        min_value: String(e["min_value"]),
-        max_value: String(e["max_value"]),
-        max_amount: String(e["max_amount"]),
-        expiry_date: String(e["expiry_date"]),
-      },
+      formData,
       {
         headers: {
           Authorization: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
         },
       }
     )
@@ -246,7 +283,7 @@ export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
       handleSweetAlert(
         true,
         "Success",
-        res?.data?.message || "updated Successfully",
+        res?.data?.message || "Updated Successfully",
         "success"
       );
     })

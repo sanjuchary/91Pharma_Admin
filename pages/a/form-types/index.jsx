@@ -2,6 +2,9 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 
+const API_URL =
+  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+
 const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },

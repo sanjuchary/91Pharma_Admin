@@ -23,7 +23,7 @@ const Coupon = () => {
     },
     {
       name: "discount",
-      label: "Discount",
+      label: "Discount(%)",
       type: "number",
       placeholder: "Enter discount",
       value: "",
@@ -60,6 +60,14 @@ const Coupon = () => {
       placeholder: "Enter expiry date",
       value: "",
       customClass: "col-12",
+    },
+    {
+      name: "image",
+      label: "Image",
+      type: "file",
+      placeholder: "Upload Coupon image",
+      value: "",
+      isSingle: true,
     },
   ];
 

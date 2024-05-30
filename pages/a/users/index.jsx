@@ -14,16 +14,36 @@ const Index = () => {
     // "remember_token": "41365",
     // "address": {},
     {
-      dataField: "first_name",
-      text: "First Name",
+      dataField: "Shop_Name",
+      text: "Shop Name",
     },
     {
-      dataField: "last_name",
-      text: "Last Name",
+      dataField: "Phone_Number",
+      text: "Phone Number",
     },
     {
-      dataField: "email",
-      text: "Email",
+      dataField: "Address",
+      text: "Address",
+    },
+    {
+      dataField: "Amount",
+      text: "Amount",
+    },
+    {
+      dataField: "Ordered date",
+      text: "Ordered date",
+    },
+    {
+      dataField: "Delivered date",
+      text: "Delivered date",
+    },
+    {
+      dataField: "Payment Method",
+      text: "Payment Method",
+    },
+    {
+      dataField: "Reports Daily",
+      text: "Reports Daily",
     },
 
     {

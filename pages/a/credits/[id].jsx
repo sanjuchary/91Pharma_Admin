@@ -20,6 +20,22 @@ const Brand = ({ defaultValue, options }) => {
 
   const values = [
     {
+      name: "phone_number",
+      label: "Shop Name",
+      type: "text",
+      placeholder: "Enter Shop Name",
+      value: "",
+      customClass: "col-md-6 col-12",
+    },
+    {
+      name: "phone_number",
+      label: "Shop ID",
+      type: "text",
+      placeholder: "Enter Shop ID",
+      value: "",
+      customClass: "col-md-6 col-12",
+    },
+    {
       name: "first_name",
       label: "First Name",
       type: "text",
@@ -42,6 +58,14 @@ const Brand = ({ defaultValue, options }) => {
       placeholder: "Enter Last Limit",
       value: "",
       customClass: "col-md-6",
+    },
+    {
+      name: "phone_number",
+      label: "Mobile Number",
+      type: "text",
+      placeholder: "Enter Mobile number",
+      value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "wallet_balance",
@@ -76,20 +100,12 @@ const Brand = ({ defaultValue, options }) => {
       customClass: "col-md-6",
     },
     {
-      name: "phone_number",
-      label: "Mobile Number",
+      name: "due",
+      label: "Due amount",
       type: "text",
-      placeholder: "Enter Mobile number",
+      placeholder: "Enter Due Amount",
       value: "",
-      customClass: "col-md-6 col-12",
-    },
-    {
-      name: "phone_number",
-      label: "Shop Name",
-      type: "text",
-      placeholder: "Enter Mobile number",
-      value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-6",
     },
   ];
 

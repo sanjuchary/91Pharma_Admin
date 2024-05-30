@@ -12,6 +12,11 @@ const Sidebar = (props) => {
       url: "/a/dashboard",
     },
     {
+      name: "Admin Analytics",
+      icon: "bx bx-home",
+      url: "/a/analytics",
+    },
+    {
       name: "Brands",
       icon: "bx bx-purchase-tag-alt",
       url: "",
@@ -143,9 +148,15 @@ const Sidebar = (props) => {
     },
 
     {
-      name: "Users",
+      name: "Orders Report",
       icon: "bx bx-user",
-      url: "/a/users",
+      url: "/a/ordersReport",
+      show: false,
+    },
+    {
+      name: "Sales Report",
+      icon: "bx bx-user",
+      url: "/a/salesReport",
       show: false,
     },
     {
