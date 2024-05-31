@@ -33,6 +33,22 @@ const Sidebar = (props) => {
       ],
     },
     {
+      name: "Banners",
+      icon: "bx bx-purchase-tag-alt",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Banner",
+          url: "/a/banners/create",
+        },
+        {
+          name: "Banners",
+          url: "/a/banners",
+        },
+      ],
+    },
+    {
       name: "Categories",
       icon: "bx bx-category",
       url: "",

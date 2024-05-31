@@ -25,6 +25,10 @@ const Index = () => {
       text: "Mobile Number",
     },
     {
+      dataField: "is_active",
+      text: "Is Active",
+    },
+    {
       dataField: "createdAt",
       text: "Created At",
       type: "datetime",
