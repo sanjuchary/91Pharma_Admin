@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../../components/table/Index";
 import Form from "../../../components/form/update";
 import * as Yup from "yup";
 import * as XLSX from "xlsx";
+import axios from "axios";
+import { saveAs } from "file-saver";
 
 const Index = () => {
+  const [loading, setLoading] = useState(false);
+
   const columns = [
     { dataField: "serial_number", text: "S.N." },
-    { dataField: "Shop_id", text: "Shop ID" },
-    { dataField: "Shop_Name", text: "Shop Name" },
-    { dataField: "Phone_Number", text: "Phone Number" },
-    { dataField: "Address", text: "Address" },
+    { dataField: "uuid", text: "Shop ID" },
+    { dataField: "user.store_detail", text: "Shop Name" },
+    { dataField: "user.phone_number", text: "Phone Number" },
+    { dataField: "shipping_address", text: "Address" },
     { dataField: "amount", text: "Amount" },
-    { dataField: "Ordered_date", text: "Ordered Date" },
-    { dataField: "Delivered_date", text: "Delivered Date" },
-    { dataField: "Payment_Method", text: "Payment Method" },
+    { dataField: "createdAt", text: "Ordered Date" },
+    { dataField: "delivery_date_time", text: "Delivered Date" },
+    { dataField: "payment_method", text: "Payment Method" },
     { dataField: "status", text: "Status" },
   ];
 
@@ -60,29 +64,45 @@ const Index = () => {
     input.click();
   };
 
-  const handleExport = () => {
-    const tableData = [
-      // Mock data for example
-      {
-        serial_number: 1,
-        Shop_id: "001",
-        Shop_Name: "Shop 1",
-        Phone_Number: "1234567890",
-        Address: "Address 1",
-        amount: 100,
-        Ordered_date: "2023-05-01",
-        Delivered_date: "2023-05-05",
-        Payment_Method: "Credit Card",
-        status: "Delivered",
-      },
-      // Add more data as needed
-    ];
+  const handleExport = async () => {
+    setLoading(true);
+    try {
+      let apiUrl = "http://localhost:4000/api/v1/order/salesReport";
+      const fromDate = values.find((val) => val.name === "from").value;
+      const toDate = values.find((val) => val.name === "to").value;
 
-    const worksheet = XLSX.utils.json_to_sheet(tableData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Orders");
+      if (fromDate && toDate) {
+        apiUrl = `http://localhost:4000/api/v1/order/salesReport?from_date=${fromDate}&to_date=${toDate}`;
+      }
 
-    XLSX.writeFile(workbook, "OrdersReport.xlsx");
+      const response = await axios.get(apiUrl, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        responseType: "blob",
+      });
+
+      const contentType = response.headers["content-type"];
+      const contentDisposition = response.headers["content-disposition"];
+
+      if (contentType && contentType.includes("application/json")) {
+        // Handle JSON response if needed
+        const json = await response.data.json();
+        console.log("JSON Response:", json);
+      } else {
+        // Convert blob to CSV text
+        const csvData = await new Response(response.data).text();
+
+        // Save CSV file using file-saver
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+        saveAs(blob, "ordersReport.csv");
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -111,13 +131,13 @@ const Index = () => {
             style={{ width: "150px", height: "40px" }}
             onClick={handleExport}
           >
-            Export
+            {loading ? "Exporting..." : "Export"}
           </button>
         </div>
       </div>
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/order/all`}
+        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/order/salesReportView`}
         buttons={buttons1}
         title="Sales"
       />

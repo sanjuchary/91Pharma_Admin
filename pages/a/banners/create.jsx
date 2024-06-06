@@ -42,23 +42,44 @@ const Banner = () => {
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("screen_name", data.screen_name);
-    formData.append("images", data.images); // Append the file object itself
+    formData.append("images", data.images);
+    console.log(
+      "Form Data:",
+      formData.get("screen_name"),
+      formData.get("images")
+    );
 
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("No token found in local storage.");
+        return;
+      }
+
       const response = await axios.post(
         `http://localhost:4000/api/v1/banner/add`,
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       console.log("Response:", response.data);
       router.push("/a/banners");
     } catch (error) {
-      console.error("Error uploading data:", error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Error response:", error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Error request:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error message:", error.message);
+      }
     }
   };
 
@@ -82,7 +103,7 @@ const Banner = () => {
               }`}
             >
               <option value="">Select Type</option>
-              <option value="Categories">Categories</option>
+              <option value="Category">Category</option>
               <option value="Offers">Offers</option>
               <option value="Home">Home</option>
             </select>

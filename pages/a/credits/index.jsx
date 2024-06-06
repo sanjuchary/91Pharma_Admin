@@ -40,7 +40,15 @@ const Index = () => {
     },
   ];
 
-  const buttons = [];
+  const buttons = [
+    {
+      text: "Add credit",
+      url: "/a/credits/create",
+      color: "dark",
+      type: "button",
+      size: "sm",
+    },
+  ];
 
   return (
     <div>

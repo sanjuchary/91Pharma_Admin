@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
+import axios from "axios";
 
 const Index = () => {
   const [filter, setFilter] = useState("all");
@@ -27,6 +28,10 @@ const Index = () => {
     {
       dataField: "is_active",
       text: "Is Active",
+      formatter: (cell, row) => {
+        console.log("Formatter cell:", cell); // Check the value of cell
+        return cell ? "Yes" : "No"; // Convert boolean to "Yes" or "No"
+      },
     },
     {
       dataField: "createdAt",
@@ -52,10 +57,49 @@ const Index = () => {
           >
             <a className="btn btn-dark btn-sm">View Details</a>
           </Link>
+          <a
+            className="btn btn-dark btn-sm"
+            style={{ marginLeft: "10px" }}
+            onClick={() => handleApprove(item.id)}
+          >
+            Approve
+          </a>
+          <a
+            className="btn btn-dark btn-sm"
+            style={{ marginLeft: "10px" }}
+            onClick={() => handleDeny(item.uuid)}
+          >
+            Deny
+          </a>
         </div>
       ),
     },
   ];
+
+  const handleApprove = (uuid) => {
+    console.log("Approve clicked for:", uuid);
+    axios
+      .post(
+        `http://localhost:4000/api/v1/shop-details/activate`,
+        {
+          shop_ids: [uuid],
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Activation response:", response.data);
+        // Optionally update your UI or state based on response
+        // For example, refresh data after approval
+      })
+      .catch((error) => {
+        console.error("Error activating shop:", error);
+        // Handle errors appropriately
+      });
+  };
 
   const buttons = [
     {

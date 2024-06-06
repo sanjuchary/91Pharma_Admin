@@ -3,11 +3,13 @@ import Link from "next/link";
 import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import moment from "moment";
 import { useRouter } from "next/router";
-// js
 import { TableService } from "../../services/table";
-
 import Pagination from "./pagination";
 import Limit from "./Limit";
+
+const getNestedValue = (obj, path) => {
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+};
 
 const Table = (props) => {
   const router = useRouter();
@@ -21,7 +23,6 @@ const Table = (props) => {
   });
 
   const pathname = router.pathname;
-  console.log(pathname);
 
   const handleData = () => {
     TableService(props.url, page, limit)
@@ -38,22 +39,25 @@ const Table = (props) => {
         setData(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error fetching data:", err);
       });
   };
 
   const handleValue = (item, column, index) => {
+    const value = getNestedValue(item, column.dataField);
+
     if (column.type === "datetime") {
-      return moment(item[column.dataField])
-        .locale("en-gb")
-        .format("MMMM Do YYYY h:mm:ss a");
+      return moment(value).locale("en-gb").format("MMMM Do YYYY h:mm:ss a");
     } else if (column.type === "render") {
       return column.render(item);
     } else if (column.dataField === "serial_number") {
       return index + 1;
+    } else if (column.dataField === "is_active") {
+      // Handle boolean value display
+      return value ? "Yes" : "No";
     }
 
-    return item[column.dataField];
+    return value;
   };
 
   const handlePage = (page) => {
@@ -71,17 +75,14 @@ const Table = (props) => {
   return (
     <div className="common__table mt-5">
       <div className="p-2">
-        {/* START TABLE */}
         <div className="d-flex justify-content-between">
-          {
-            <p className="fs-7">
-              showing{" "}
-              {pathname === "/a/categories" || pathname === "/a/brands"
-                ? data?.data?.length
-                : data?.length}{" "}
-              out of {(stats && stats.total_rows) || 0} rows ...
-            </p>
-          }
+          <p className="fs-7">
+            showing{" "}
+            {pathname === "/a/categories" || pathname === "/a/brands"
+              ? data?.data?.length
+              : data?.length}{" "}
+            out of {stats.total_rows || 0} rows ...
+          </p>
           <div className="d-inline-flex">
             {props.buttons.map((button, key) => (
               <Link key={key} href={button.url}>
@@ -130,12 +131,11 @@ const Table = (props) => {
             </tbody>
           </table>
         </div>
-        {/* END TABLE */}
         <div className="d-flex justify-content-between">
           <Limit limit={limit} handleLimit={handleLimit} />
           <Pagination
             page={page}
-            total_pages={(stats && stats.total_pages) || 0}
+            total_pages={stats.total_pages || 0}
             handlePage={handlePage}
           />
         </div>
