@@ -25,15 +25,26 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/a/ordersReport": [
+    "/a/_middleware": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/ordersReport.js"
+      "server/middleware-runtime.js",
+      "server/pages/a/_middleware.js"
     ],
-    "/a/salesReport": [
+    "/a/brands": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/salesReport.js"
+      "static/chunks/pages/a/brands.js"
+    ],
+    "/a/brands/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/a/brands/[id].js"
+    ],
+    "/a/dashboard": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/a/dashboard.js"
     ]
   },
   "ampFirstPages": []

@@ -8,7 +8,7 @@ import Pagination from "./pagination";
 import Limit from "./Limit";
 
 const getNestedValue = (obj, path) => {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+  return path?.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
 const Table = (props) => {
