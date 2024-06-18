@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+  process.env.NEXT_PUBLIC_PROD_API_URL || "https://admin.91pharma.in/api/v1";
 
 const Index = () => {
   const router = useRouter();
@@ -150,7 +150,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`}
+        url={`https://admin.91pharma.in/api/v1/category/get-all`}
         buttons={buttons}
         title="Categories"
       />

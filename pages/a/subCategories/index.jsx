@@ -6,8 +6,7 @@ import { useState } from "react";
 import SweetAlert from "../../../components/common/SweetAlert";
 import axios from "axios";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_PROD_API_URL;
 
 const Index = () => {
   const router = useRouter();
@@ -151,7 +150,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get-all`}
+        url={`https://admin.91pharma.in/api/v1/sub-category/get-all`}
         buttons={buttons}
         title="SubCategories"
       />

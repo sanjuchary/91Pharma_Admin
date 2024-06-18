@@ -19,7 +19,7 @@ const Brand = ({ defaultValue, options }) => {
   const modifyURL = (url) => {
     return url.replace(
       "https://localhost/8000/api/v1/",
-      "http://localhost:4000/api/v1/"
+      "https://admin.91pharma.in/api/v1/"
     );
   };
 
@@ -37,7 +37,7 @@ const Brand = ({ defaultValue, options }) => {
   const fetchImages = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/v1/banner/get/${name}`
+        `https://admin.91pharma.in/api/v1/banner/get/${name}`
       );
       const bannersData = response.data.all_banners;
       const imagePromises = bannersData.map(async (banner) => {
@@ -68,19 +68,19 @@ const Brand = ({ defaultValue, options }) => {
     setEditModalOpen(true);
   };
 
-  const handleDeleteClick = async (bannerId) => {
-    const confirmDelete = confirm(
-      "Are you sure you want to delete this banner?"
-    );
-    if (confirmDelete) {
-      try {
-        await axios.delete(`http://localhost:4000/api/v1/banner/${bannerId}`);
-        setBanners(banners.filter((banner) => banner.id !== bannerId));
-      } catch (error) {
-        console.error("Error deleting banner:", error);
-      }
-    }
-  };
+  // const handleDeleteClick = async (bannerId) => {
+  //   const confirmDelete = confirm(
+  //     "Are you sure you want to delete this banner?"
+  //   );
+  //   if (confirmDelete) {
+  //     try {
+  //       await axios.delete(`https://admin.91pharma.in/api/v1/banner/${bannerId}`);
+  //       setBanners(banners.filter((banner) => banner.id !== bannerId));
+  //     } catch (error) {
+  //       console.error("Error deleting banner:", error);
+  //     }
+  //   }
+  // };
 
   const handleEditSubmit = async (event) => {
     console.log("event", currentBanner);
@@ -93,7 +93,7 @@ const Brand = ({ defaultValue, options }) => {
 
     try {
       await axios.patch(
-        `http://localhost:4000/api/v1/banner/update/${id}/document/${currentBanner.id}`,
+        `https://admin.91pharma.in/api/v1/banner/update/${id}/document/${currentBanner.id}`,
         formData,
         {
           headers: {
@@ -138,7 +138,7 @@ const Brand = ({ defaultValue, options }) => {
                 />
                 <p>{banner.name}</p>
                 <div className="d-flex gap-3">
-                  <button
+                  {/* <button
                     style={{
                       backgroundColor: "red",
                       color: "white",
@@ -150,7 +150,7 @@ const Brand = ({ defaultValue, options }) => {
                     onClick={() => handleDeleteClick(banner.id)}
                   >
                     Delete
-                  </button>
+                  </button> */}
                   <button
                     className="rounded"
                     style={{

@@ -8,7 +8,7 @@ import Pagination from "./pagination";
 import Limit from "./Limit";
 
 const getNestedValue = (obj, path) => {
-  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+  return path?.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
 const Table = (props) => {
@@ -22,6 +22,8 @@ const Table = (props) => {
     current_page: 0,
   });
 
+  console.log(props);
+
   const pathname = router.pathname;
 
   const handleData = () => {
@@ -29,14 +31,14 @@ const Table = (props) => {
       .then((res) => {
         let response = res.data;
         setStats({
-          total_rows: response.total_rows,
-          total_pages: response.total_pages,
-          current_page: response.current_page,
+          total_rows: response?.total_rows,
+          total_pages: response?.total_pages,
+          current_page: response?.current_page,
         });
         if (response?.message === "Applied Users For Credit Not Found") {
           return setData([]);
         }
-        setData(response.data);
+        setData(response?.data);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
@@ -45,6 +47,7 @@ const Table = (props) => {
 
   const handleValue = (item, column, index) => {
     const value = getNestedValue(item, column.dataField);
+    console.log("item", item);
 
     if (column.type === "datetime") {
       return moment(value).locale("en-gb").format("MMMM Do YYYY h:mm:ss a");

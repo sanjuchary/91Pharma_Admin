@@ -4,8 +4,8 @@ import Table from "../../../components/table/Index";
 import Link from "next/link";
 
 const url =
-  `${process.env.NEXT_PUBLIC_PROD_API_URL}/banner/get/` ||
-  "http://localhost:4000/api/v1/banner/get/";
+  `https://admin.91pharma.in/api/v1/banner/get/` ||
+  "https://admin.91pharma.in/api/v1banner/get/";
 
 const Index = () => {
   const renderImage = (item) => {
@@ -49,7 +49,7 @@ const Index = () => {
           <div>
             <Link
               href={{
-                pathname: "/a/banners/[id]",
+                pathname: `/a/banners/[id]`,
                 query: { id: item.id, name: item.screen_name },
               }}
             >

@@ -19,7 +19,7 @@ const Coupon = () => {
       type: "text",
       placeholder: "Enter coupon Code",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "discount",
@@ -27,7 +27,7 @@ const Coupon = () => {
       type: "number",
       placeholder: "Enter discount",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "min_value",
@@ -35,7 +35,7 @@ const Coupon = () => {
       type: "number",
       placeholder: "Enter min value",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "max_value",
@@ -43,7 +43,7 @@ const Coupon = () => {
       type: "number",
       placeholder: "Enter max value",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "max_amount",
@@ -51,7 +51,7 @@ const Coupon = () => {
       type: "number",
       placeholder: "Enter max amount",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "expiry_date",
@@ -59,7 +59,7 @@ const Coupon = () => {
       type: "date",
       placeholder: "Enter expiry date",
       value: "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "image",

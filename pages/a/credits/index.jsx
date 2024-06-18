@@ -61,7 +61,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/users/applyCreditedUsers`}
+        url={`https://admin.91pharma.in/api/v1/users/applyCreditedUsers`}
         buttons={buttons}
         title="Orders"
       />

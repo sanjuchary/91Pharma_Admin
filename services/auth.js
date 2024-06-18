@@ -3,9 +3,11 @@ import axios from "axios";
 import Router from "next/router";
 import { getCookie, setCookies } from "cookies-next";
 
+console.log("urlLog", process.env.NEXT_PUBLIC_PROD_API_URL);
+
 const loginService = async (data) => {
   return await axios
-    .post(`${process.env.NEXT_PUBLIC_PROD_API_URL}/users/signin`, data)
+    .post(`https://admin.91pharma.in/api/v1/users/signin`, data)
     .then((res) => {
       let response = res.data;
       let message = "";

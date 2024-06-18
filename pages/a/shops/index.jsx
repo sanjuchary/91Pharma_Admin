@@ -7,7 +7,7 @@ import axios from "axios";
 const Index = () => {
   const [filter, setFilter] = useState("all");
   const [url, setUrl] = useState(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}/shop-details/get-all`
+    `https://admin.91pharma.in/api/v1/shop-details/get-all`
   );
 
   const columns = [
@@ -80,7 +80,7 @@ const Index = () => {
     console.log("Approve clicked for:", uuid);
     axios
       .post(
-        `http://localhost:4000/api/v1/shop-details/activate`,
+        `https://admin.91pharma.in/api/v1/shop-details/activate`,
         {
           shop_ids: [uuid],
         },
@@ -112,7 +112,7 @@ const Index = () => {
     const value = event.target.value;
     setFilter(value);
 
-    let newUrl = `${process.env.NEXT_PUBLIC_PROD_API_URL}/shop-details/get-all`;
+    let newUrl = `https://admin.91pharma.in/api/v1/shop-details/get-all`;
     if (value === "approved") {
       newUrl += "?status=approved";
     } else if (value === "pending") {
@@ -122,7 +122,7 @@ const Index = () => {
   };
 
   useEffect(() => {
-    let newUrl = `${process.env.NEXT_PUBLIC_PROD_API_URL}/shop-details/get-all`;
+    let newUrl = `https://admin.91pharma.in/api/v1/shop-details/get-all`;
     if (filter === "approved") {
       newUrl += "?status=approved";
     } else if (filter === "pending") {

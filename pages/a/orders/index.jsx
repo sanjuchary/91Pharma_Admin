@@ -3,8 +3,8 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_PROD_API_URL;
+console.log("API", API_URL);
 
 const Index = () => {
   // State to manage order status and table URL
@@ -180,7 +180,7 @@ const Index = () => {
       text: "Phone Number",
     },
     {
-      dataField: "Address",
+      dataField: "shipping_address",
       text: "Address",
     },
     {
@@ -188,19 +188,19 @@ const Index = () => {
       text: "Amount",
     },
     {
-      dataField: "Ordered date",
+      dataField: "createdAt",
       text: "Ordered date",
     },
     {
-      dataField: "Delivered date",
+      dataField: "delivery_date_time",
       text: "Delivered date",
     },
     {
-      dataField: "Payment Method",
+      dataField: "payment_method",
       text: "Payment Method",
     },
     {
-      dataField: "status",
+      dataField: "payment_status",
       text: "Status",
     },
     {
@@ -209,7 +209,7 @@ const Index = () => {
       type: "render",
       render: (item) => (
         <div>
-          <Link href={`/a/orders/${item.uuid}`}>
+          <Link href={`/a/orders/${item.id}`}>
             <a className="btn btn-dark btn-sm">View Details</a>
           </Link>
         </div>

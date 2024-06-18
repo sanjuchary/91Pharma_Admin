@@ -9,7 +9,7 @@ import { getCookie } from "cookies-next";
 // const getOptions = async (tableName, label, val, isData, token) => {
 //   let selectListIdName = [];
 //   const arr = axios.get(
-//     "http://localhost:4000/api/v1" + `/${tableName}/get-all`,
+//     "https://admin.91pharma.in/api/v1" + `/${tableName}/get-all`,
 //     {
 //       headers: {
 //         Authorization: token,
@@ -386,7 +386,7 @@ export async function getServerSideProps(context) {
   const token = context.req.cookies.token;
 
   const categoriesResponse = await axios.get(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`,
+    `https://admin.91pharma.in/api/v1/category/get-all`,
     {
       headers: {
         Authorization: token,
@@ -394,7 +394,7 @@ export async function getServerSideProps(context) {
     }
   );
   const brandsResponse = await axios.get(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`,
+    `https://admin.91pharma.in/api/v1/brand/get-all`,
     {
       headers: {
         Authorization: token,
@@ -402,7 +402,7 @@ export async function getServerSideProps(context) {
     }
   );
   const subCategoriesResponse = await axios.get(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get-all`,
+    `https://admin.91pharma.in/api/v1/sub-category/get-all`,
     {
       headers: {
         Authorization: token,

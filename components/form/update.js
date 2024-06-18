@@ -25,7 +25,7 @@ const Update = (props) => {
   const modifyURL = (url) => {
     return url.replace(
       "https://localhost/8000/api/v1//",
-      "http://localhost:4000/api/v1/"
+      "https://admin.91pharma.in/api/v1/"
     );
   };
 
@@ -72,7 +72,7 @@ const Update = (props) => {
     if (selectedCategory) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get/by/${selectedCategory}`,
+          `https://admin.91pharma.in/api/v1/category/get/by/${selectedCategory}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),
@@ -150,7 +150,7 @@ const Update = (props) => {
 
   const getData = () => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.get.url, {
+      .get(`https://admin.91pharma.in/api/v1` + props.api.get.url, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import SweetAlert from "../../../components/common/SweetAlert";
 
 const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+  process.env.NEXT_PUBLIC_PROD_API_URL || "https://admin.91pharma.in/api/v1";
+console.log("API", process.env.NEXT_PUBLIC_PROD_API_URL);
 
 const Index = () => {
   const router = useRouter();
@@ -155,6 +156,7 @@ const Index = () => {
       <Table
         columns={columns}
         url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`}
+        // url={`https://admin.91pharma.in/api/v1/brand/get-all`}
         buttons={buttons}
         title="Brands"
       />

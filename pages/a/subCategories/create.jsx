@@ -98,7 +98,7 @@ export async function getServerSideProps(context) {
   const token = context.req.cookies.token;
 
   const categoriesResponse = await axios.get(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`,
+    `https://admin.91pharma.in/api/v1/category/get-all`,
     {
       headers: {
         Authorization: token,

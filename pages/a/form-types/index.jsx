@@ -2,8 +2,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_PROD_API_URL;
 
 const Index = () => {
   const columns = [
@@ -61,7 +60,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/form-type/get-all`}
+        url={`https://admin.91pharma.in/api/v1/form-type/get-all`}
         buttons={buttons}
         title="Form Types"
       />

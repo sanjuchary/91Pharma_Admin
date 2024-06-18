@@ -4,8 +4,7 @@ import * as Yup from "yup";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Form from "../../../components/form/update";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_PROD_API_URL;
 
 const Order = () => {
   const router = useRouter();
@@ -32,15 +31,15 @@ const Order = () => {
       type: "text",
       placeholder: "Enter user id",
       value: orderData?.user_id || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "amount",
-      label: "Amount",
+      label: "Amount_paid",
       type: "text",
       placeholder: "Enter amount",
       value: orderData?.amount || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "shipping_charge",
@@ -48,7 +47,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter shipping charge",
       value: orderData?.shipping_charge || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "tax_percentage",
@@ -56,7 +55,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter tax percentage",
       value: orderData?.tax_percentage || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "tax_amount",
@@ -64,23 +63,16 @@ const Order = () => {
       type: "text",
       placeholder: "Enter tax amount",
       value: orderData?.tax_amount || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
-    {
-      name: "total_amount",
-      label: "Total Amount",
-      type: "text",
-      placeholder: "Enter total amount",
-      value: orderData?.total_amount || "",
-      customClass: "col-12",
-    },
+
     {
       name: "shipping_address",
       label: "Shipping Address",
       type: "text",
       placeholder: "Enter shipping address",
       value: orderData?.shipping_address || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "billing_address",
@@ -88,7 +80,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter billing address",
       value: orderData?.billing_address || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "payment_method",
@@ -96,7 +88,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter payment method",
       value: orderData?.payment_method || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
     {
       name: "status",
@@ -104,7 +96,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter status",
       value: orderData?.status || "",
-      customClass: "col-12",
+      customClass: "col-3",
     },
   ];
 
@@ -168,6 +160,7 @@ const Order = () => {
                     <th>Product Name</th>
                     <th>Product Price</th>
                     <th>Quantity</th>
+                    <th>Discount(%)</th>
                     <th>Total Price</th>
                   </tr>
                 </thead>
@@ -178,16 +171,17 @@ const Order = () => {
                       <td>{item.product.name}</td>
                       <td>{item.product.price}</td>
                       <td>{item.quantity}</td>
+                      <td>{item.product.discount}%</td>
                       <td>{calculateSubtotal(item)}</td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan="4" className="text-end fw-bold">
+                    <td colSpan="5" className="text-end fw-bold">
                       Subtotal:
                     </td>
-                    <td className="fw-bold">{orderData.amount}</td>
+                    <td className="fw-bold">₹{orderData.amount}</td>
                   </tr>
                 </tfoot>
               </table>

@@ -47,16 +47,12 @@ const Index = () => {
     formData.append("file", file);
 
     axios
-      .post(
-        `${process.env.NEXT_PUBLIC_PROD_API_URL}` + "/product/upload",
-        formData,
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      )
+      .post(`https://admin.91pharma.in/api/v1` + "/product/upload", formData, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
       .then((res) => {
         handleSweetAlert(
           true,

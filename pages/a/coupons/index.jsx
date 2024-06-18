@@ -6,8 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import SweetAlert from "../../../components/common/SweetAlert";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+const API_URL = process.env.NEXT_PUBLIC_PROD_API_URL;
 
 const Index = () => {
   const router = useRouter();
@@ -139,7 +138,7 @@ const Index = () => {
 
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/coupon/all`}
+        url={`https://admin.91pharma.in/api/v1/coupon/all`}
         buttons={buttons}
         title="Coupons"
       />

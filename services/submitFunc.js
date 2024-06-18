@@ -18,16 +18,12 @@ export const onSubmitAddProduct = (e, props, handleSweetAlert) => {
   formData.append("sub_category_id", e["sub_category_id"]);
 
   axios
-    .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    )
+    .post(`https://admin.91pharma.in/api/v1` + props.api.update.url, formData, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
     .then((res) => {
       handleSweetAlert(
         true,
@@ -45,7 +41,7 @@ export const onSubmitAddProduct = (e, props, handleSweetAlert) => {
 export const onSubmitAddForm = (e, props, handleSweetAlert) => {
   axios
     .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.get.url,
+      `https://admin.91pharma.in/api/v1` + props.api.get.url,
       {
         form_type: e["form_type"],
       },
@@ -72,7 +68,7 @@ export const onSubmitAddForm = (e, props, handleSweetAlert) => {
 // export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
 //   axios
 //     .post(
-//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+//       `https://admin.91pharma.in/api/v1` + props.api.update.url,
 //       {
 //         name: e["name"],
 //       },
@@ -104,16 +100,12 @@ export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
   }
 
   axios
-    .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    )
+    .post(`https://admin.91pharma.in/api/v1` + props.api.update.url, formData, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
+    })
     .then((res) => {
       console.log(res);
       handleSweetAlert(
@@ -134,7 +126,7 @@ export const onSubmitAddCategory = (e, props, handleSweetAlert) => {
 //   console.log("Values", id);
 //   axios
 //     .post(
-//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,formData
+//       `https://admin.91pharma.in/api/v1` + props.api.update.url,formData
 //       {
 //         name: e["name"],
 //         category_id: String(e["category_id"]),
@@ -168,16 +160,12 @@ export const onSubmitAddSubCategory = (e, props, handleSweetAlert) => {
   }
 
   axios
-    .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
-        },
-      }
-    )
+    .post(`https://admin.91pharma.in/api/v1` + props.api.update.url, formData, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
+      },
+    })
     .then((res) => {
       handleSweetAlert(
         true,
@@ -200,16 +188,12 @@ export const onSubmitAddBrand = (e, props, handleSweetAlert) => {
   }
 
   axios
-    .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
-        },
-      }
-    )
+    .post(`https://admin.91pharma.in/api/v1` + props.api.update.url, formData, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
+      },
+    })
     .then((res) => {
       handleSweetAlert(
         true,
@@ -227,7 +211,7 @@ export const onSubmitAddBrand = (e, props, handleSweetAlert) => {
 // export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
 //   axios
 //     .post(
-//       `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
+//       `https://admin.91pharma.in/api/v1` + props.api.update.url,
 //       {
 //         code: e["code"],
 //         discount: String(e["discount"]),
@@ -269,16 +253,12 @@ export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
   }
 
   axios
-    .post(
-      `${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.update.url,
-      formData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-          "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
-        },
-      }
-    )
+    .post(`https://admin.91pharma.in/api/v1` + props.api.update.url, formData, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data", // Ensuring the correct content type for form data
+      },
+    })
     .then((res) => {
       handleSweetAlert(
         true,
