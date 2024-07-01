@@ -57,7 +57,7 @@ const Banner = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/banner/add`,
+        `https://admin.91pharma.in/api/v1/banner/add`,
         formData,
         {
           headers: {

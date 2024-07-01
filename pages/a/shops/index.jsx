@@ -80,7 +80,7 @@ const Index = () => {
     console.log("Approve clicked for:", uuid);
     axios
       .post(
-        `http://localhost:4000/api/v1/shop-details/activate`,
+        `https://admin.91pharma.in/api/v1/shop-details/activate`,
         {
           shop_ids: [uuid],
         },

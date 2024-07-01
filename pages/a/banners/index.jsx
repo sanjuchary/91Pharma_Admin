@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const url =
   `${process.env.NEXT_PUBLIC_PROD_API_URL}/banner/get/` ||
-  "http://localhost:4000/api/v1/banner/get/";
+  "https://admin.91pharma.in/api/v1/banner/get/";
 
 const Index = () => {
   const renderImage = (item) => {

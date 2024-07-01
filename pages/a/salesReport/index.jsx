@@ -67,12 +67,12 @@ const Index = () => {
   const handleExport = async () => {
     setLoading(true);
     try {
-      let apiUrl = "http://localhost:4000/api/v1/order/salesReport";
+      let apiUrl = "https://admin.91pharma.in/api/v1/order/salesReport";
       const fromDate = values.find((val) => val.name === "from").value;
       const toDate = values.find((val) => val.name === "to").value;
 
       if (fromDate && toDate) {
-        apiUrl = `http://localhost:4000/api/v1/order/salesReport?from_date=${fromDate}&to_date=${toDate}`;
+        apiUrl = `https://admin.91pharma.in/api/v1/order/salesReport?from_date=${fromDate}&to_date=${toDate}`;
       }
 
       const response = await axios.get(apiUrl, {
