@@ -11,7 +11,14 @@ import {
 } from "../../../helpers/common/dropdownHelper";
 import axios from "../../../utils/axios";
 
-const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
+const Product = ({
+  filters,
+  brands,
+  defaultFilter,
+  defaultBrand,
+  images,
+  defaultValues,
+}) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -43,7 +50,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       customClass: "col-12",
     },
     {
-      name: "product_id",
+      name: "p",
       label: "Association Product ID",
       type: "text",
       placeholder: "Enter Product ID",
@@ -317,7 +324,6 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
   ]);
 
   return (
-    //react hook form
     <div>
       <BreadCrumb
         items={[
@@ -328,9 +334,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 
       <div className="d-flex mt-3">
         <button
-          className={`btn 
-            ${tab === 0 ? "btn-dark" : "btn-outline-dark"}
-            me-3`}
+          className={`btn ${tab === 0 ? "btn-dark" : "btn-outline-dark"} me-3`}
           onClick={() => {
             setTab(0);
           }}
@@ -338,9 +342,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
           Details
         </button>
         <button
-          className={`btn 
-         ${tab === 1 ? "btn-dark" : "btn-outline-dark"}
-          me-3`}
+          className={`btn ${tab === 1 ? "btn-dark" : "btn-outline-dark"} me-3`}
           onClick={() => {
             setTab(1);
           }}
@@ -357,8 +359,9 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
           redirectUrl="/a/products"
           api={{
             get: { method: "get", url: `/product/get-all?id=${id}` },
-            update: { method: "patch", url: `/products/${id}` },
+            update: { method: "post", url: `/products/update${id}` },
           }}
+          defaultValues={defaultValues}
         />
       )}
       {tab === 1 && <Images id={id} images={images} />}
@@ -374,12 +377,15 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 //     await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
 //     await getOptions("brands"),
 //   ]);
-//   // const defaultFilter
+
 //   let defaultFilter = data.data.filters.map((row) => {
 //     return { value: row.id, label: row.name };
 //   })[0];
+
 //   let defaultBrand = data.data.brand;
 //   defaultBrand = { value: defaultBrand.uuid, label: defaultBrand.name };
+
+//   const defaultValues = data.data;
 
 //   return {
 //     props: {
@@ -388,6 +394,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 //       defaultFilter,
 //       defaultBrand,
 //       images: data.data.images,
+//       defaultValues,
 //     },
 //   };
 // }

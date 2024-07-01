@@ -120,7 +120,7 @@ const Product = ({ categories, brands, subCategories }) => {
       customClass: "col-md-6 col-12",
     },
     {
-      name: "image",
+      name: "product_images",
       label: "Image",
       type: "file",
       placeholder: "Select Product image",

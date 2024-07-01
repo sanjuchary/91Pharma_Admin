@@ -17,10 +17,10 @@ import {
 } from "../../services/submitFunc";
 
 const Update = (props) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subCategories, setSubCategories] = useState([]);
-  const [imageDataList, setImageDataList] = useState("");
+  const [imageDataList, setImageDataList] = useState([]);
 
   const modifyURL = (url) => {
     return url.replace(
@@ -40,31 +40,35 @@ const Update = (props) => {
     });
   };
 
-  const fetchImages = useCallback(async (url) => {
+  const fetchImages = useCallback(async (documents) => {
     try {
-      if (typeof url !== "string") {
-        console.error("Expected a string URL but got:", url);
+      if (!documents || !Array.isArray(documents) || documents.length === 0) {
+        console.error("No image documents found");
         return;
       }
-      const response = await axios.get(modifyURL(url), {
-        responseType: "blob",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+
+      const imagePromises = documents.map(async (document) => {
+        const response = await axios.get(modifyURL(document.url), {
+          responseType: "blob",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        });
+        const blob = response.data;
+        const base64Image = await convertBlobToBase64(blob);
+        return base64Image;
       });
-      const blob = response.data;
-      const base64Image = await convertBlobToBase64(blob);
-      setImageDataList(base64Image);
-      console.log("base", base64Image);
-      return base64Image;
+
+      const imageDataList = await Promise.all(imagePromises);
+      setImageDataList(imageDataList);
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   }, []);
 
   useEffect(() => {
-    if (data?.data?.document?.url) {
-      fetchImages(data?.data?.document?.url);
+    if (data.data?.documents) {
+      fetchImages(data.data.documents);
     }
   }, [data, fetchImages]);
 
@@ -106,7 +110,7 @@ const Update = (props) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(props.schema),
-    defaultValues: data,
+    defaultValues: data || {},
   });
 
   const handleSweetAlert = (show, title, text, type) => {
@@ -150,32 +154,38 @@ const Update = (props) => {
 
   const getData = () => {
     axios
-      .get(`https://admin.91pharma.in/api/v1` + props.api.get.url, {
+      .get(`https://admin.91pharma.in/api/v1${props.api.get.url}`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((res) => {
         let response = res.data;
+        console.log("res", response);
         setData(response);
+
         let formData = {};
-        props.values.map((value) => {
-          formData[value.name] = response.data[value.name];
-          if (value.label === "Image") {
-            formData[value.name] = response.data.document[value.name];
+        props.values.forEach((value) => {
+          if (response.data) {
+            formData[value.name] =
+              value.label === "Image"
+                ? response.data.documents[0][value.name]
+                : response.data[value.name];
           }
         });
+
         reset(formData);
-        props.values.map((value) => {
-          if (value.defaultValue != "" && value.defaultValue != null) {
-            if (value.isMulit) {
+
+        props.values.forEach((value) => {
+          if (value.defaultValue !== "" && value.defaultValue !== null) {
+            if (value.isMulti) {
               setValue(
                 value.name,
                 value.defaultValue.map((row) => row.value)
               );
             } else {
               setValue(value.name, value.defaultValue.value);
-              console.log("IMage", value.name, value.defaultValue.value);
+              console.log("Image", value.name, value.defaultValue.value);
             }
           }
         });
@@ -283,15 +293,17 @@ const Update = (props) => {
                 <label id={`form-element-${value.name}`}>{value.label}</label>
                 <div className="row">
                   <div className="col-12">
-                    {imageDataList && (
-                      <Image
-                        src={imageDataList}
-                        alt="image"
-                        className="common_image"
-                        width={500}
-                        height={500}
-                      />
-                    )}
+                    {imageDataList.map((base64Image, idx) => (
+                      <div key={idx} className="mb-2">
+                        <Image
+                          src={base64Image}
+                          alt={`image-${idx}`}
+                          className="common_image"
+                          width={100}
+                          height={100}
+                        />
+                      </div>
+                    ))}
                     <input
                       className="form-control"
                       id={`form-element-${value.name}`}
@@ -318,7 +330,7 @@ const Update = (props) => {
                   name={value.name}
                   type={value.type}
                   placeholder={value.placeholder}
-                  defaultValue={data?.data?.name}
+                  defaultValue={data?.data ? data.data[value.name] : ""}
                   {...register(value.name)}
                 />
                 <p className="text-danger mb-0">
