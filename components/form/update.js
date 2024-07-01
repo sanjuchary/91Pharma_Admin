@@ -25,7 +25,7 @@ const Update = (props) => {
   const modifyURL = (url) => {
     return url.replace(
       "https://localhost/8000/api/v1//",
-      "http://localhost:4000/api/v1/"
+      "https://admin.91pharma.in/api/v1"
     );
   };
 
