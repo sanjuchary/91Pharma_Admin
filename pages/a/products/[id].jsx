@@ -15,6 +15,8 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
   const router = useRouter();
   const { id } = router.query;
 
+  console.log("ID", id);
+
   const [isLoading, setIsLoading] = useState(true);
   const [tab, setTab] = useState(0);
 
@@ -27,7 +29,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 
   const [values, setValues] = useState([
     {
-      name: "name",
+      name: "brand_id",
       label: "Name",
       type: "text",
       placeholder: "Enter Product name",
@@ -35,7 +37,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       customClass: "col-md-6 col-12",
     },
     {
-      name: "description",
+      name: "price",
       label: "Description",
       type: "text",
       placeholder: "Enter Product description",
@@ -43,7 +45,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       customClass: "col-12",
     },
     {
-      name: "product_id",
+      name: "category_id",
       label: "Association Product ID",
       type: "text",
       placeholder: "Enter Product ID",
@@ -349,18 +351,18 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
         </button>
       </div>
 
-      {tab === 0 && id != undefined && (
-        <Form
-          values={values}
-          schema={schema}
-          isMultiPart={true}
-          redirectUrl="/a/products"
-          api={{
-            get: { method: "get", url: `/product/get-all?id=${id}` },
-            update: { method: "patch", url: `/products/${id}` },
-          }}
-        />
-      )}
+      {/* {tab === 0 && id != undefined && ( */}
+      <Form
+        values={values}
+        schema={schema}
+        isMultiPart={true}
+        redirectUrl="/a/products"
+        api={{
+          get: { method: "get", url: `/product/get-all?id=${id}` },
+          update: { method: "patch", url: `/products/${id}` },
+        }}
+      />
+      {/* )} */}
       {tab === 1 && <Images id={id} images={images} />}
     </div>
   );

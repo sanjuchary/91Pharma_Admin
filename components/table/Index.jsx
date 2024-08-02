@@ -37,6 +37,7 @@ const Table = (props) => {
           return setData([]);
         }
         setData(response.data);
+        console.log("response", response.data);
       })
       .catch((err) => {
         console.error("Error fetching data:", err);

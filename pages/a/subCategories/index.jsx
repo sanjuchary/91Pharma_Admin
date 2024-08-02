@@ -30,7 +30,7 @@ const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     {
-      dataField: "uuid",
+      dataField: "id",
       text: "Id",
     },
     {
@@ -38,20 +38,8 @@ const Index = () => {
       text: "Name",
     },
     {
-      dataField: "null",
+      dataField: "category.name",
       text: "Parent",
-      type: "render",
-      render: (item) => {
-        if (item) {
-          return (
-            <Link href={`/a/subCategories/${item?.category?.uuid}`}>
-              <a className="text-dark">{item?.category?.name}</a>
-            </Link>
-          );
-        }
-        console.log("item", item.category?.name);
-        return "";
-      },
     },
     {
       dataField: "createdAt",
@@ -145,7 +133,7 @@ const Index = () => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Categories", url: "/a/subCategories" },
+          { text: "Sub Categories", url: "/a/subCategories" },
         ]}
       />
 

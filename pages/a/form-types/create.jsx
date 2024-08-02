@@ -27,13 +27,12 @@ const Coupon = () => {
           { text: "Create Form type", url: "/a/form-types" },
         ]}
       />
-
       <Form
         values={values}
         schema={schema}
-        isMultiPart={false}
+        isMultiPart={true}
         api={{
-          update: {
+          get: {
             method: "post",
             url: `/form-type/add`,
           },

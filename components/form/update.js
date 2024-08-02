@@ -14,6 +14,7 @@ import {
   onSubmitAddForm,
   onSubmitAddProduct,
   onSubmitAddSubCategory,
+  onUpdateCategory,
 } from "../../services/submitFunc";
 
 const Update = (props) => {
@@ -132,6 +133,9 @@ const Update = (props) => {
         break;
       case "category":
         onSubmitAddCategory(e, props, handleSweetAlert);
+        break;
+      case "updateCategory":
+        onUpdateCategory(e, props, handleSweetAlert);
         break;
       case "subCategory":
         onSubmitAddSubCategory(e, props, handleSweetAlert);

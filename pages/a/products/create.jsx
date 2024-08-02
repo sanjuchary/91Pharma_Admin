@@ -120,7 +120,7 @@ const Product = ({ categories, brands, subCategories }) => {
       customClass: "col-md-6 col-12",
     },
     {
-      name: "image",
+      name: "product_images",
       label: "Image",
       type: "file",
       placeholder: "Select Product image",
@@ -280,7 +280,6 @@ const Product = ({ categories, brands, subCategories }) => {
     },
     {
       name: "breast_feeding_related_information",
-
       label: "Breast Feeding Related Information",
       type: "textarea",
       placeholder: "Enter Product breast feeding related information",
@@ -370,7 +369,7 @@ const Product = ({ categories, brands, subCategories }) => {
       <Form
         values={values}
         schema={schema}
-        isMultiPart={true}
+        isMultiPart={false}
         redirectUrl="/a/products"
         api={{
           update: { method: "post", url: `/product/add` },

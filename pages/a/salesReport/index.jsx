@@ -12,8 +12,8 @@ const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     { dataField: "uuid", text: "Shop ID" },
-    { dataField: "user.store_detail", text: "Shop Name" },
-    { dataField: "user.phone_number", text: "Phone Number" },
+    { dataField: "user?.store_detail?.name", text: "Shop Name" }, // Assuming 'name' is a property in store_detail
+    { dataField: "user?.phone_number", text: "Phone Number" },
     { dataField: "shipping_address", text: "Address" },
     { dataField: "amount", text: "Amount" },
     { dataField: "createdAt", text: "Ordered Date" },

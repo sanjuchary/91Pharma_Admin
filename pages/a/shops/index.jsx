@@ -3,16 +3,18 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 import axios from "axios";
+import SweetAlert from "../../../components/common/SweetAlert";
+import { useRouter } from "next/router";
 
 const Index = () => {
   const [filter, setFilter] = useState("all");
+  const router = useRouter();
   const [url, setUrl] = useState(
     `${process.env.NEXT_PUBLIC_PROD_API_URL}/shop-details/get-all`
   );
 
   const columns = [
     { dataField: "serial_number", text: "S.N." },
-
     {
       dataField: "shop_name",
       text: "Shop Name",
@@ -28,9 +30,8 @@ const Index = () => {
     {
       dataField: "is_active",
       text: "Is Active",
-      formatter: (cell, row) => {
-        console.log("Formatter cell:", cell); // Check the value of cell
-        return cell ? "Yes" : "No"; // Convert boolean to "Yes" or "No"
+      formatter: (cell) => {
+        return cell ? "Yes" : "No";
       },
     },
     {
@@ -57,33 +58,53 @@ const Index = () => {
           >
             <a className="btn btn-dark btn-sm">View Details</a>
           </Link>
-          <a
-            className="btn btn-dark btn-sm"
-            style={{ marginLeft: "10px" }}
-            onClick={() => handleApprove(item.id)}
-          >
-            Approve
-          </a>
-          <a
-            className="btn btn-dark btn-sm"
-            style={{ marginLeft: "10px" }}
-            onClick={() => handleDeny(item.uuid)}
-          >
-            Deny
-          </a>
+          {item.is_active ? (
+            <a
+              className="btn btn-dark btn-sm"
+              style={{ marginLeft: "10px" }}
+              onClick={() => handleInactive(item.id)}
+            >
+              Inactive
+            </a>
+          ) : (
+            <a
+              className="btn btn-dark btn-sm"
+              style={{ marginLeft: "10px" }}
+              onClick={() => handleApprove(item.id)}
+            >
+              Approve
+            </a>
+          )}
+          {!item.is_active && (
+            <a
+              className="btn btn-dark btn-sm"
+              style={{ marginLeft: "10px" }}
+              onClick={() => handleDeny(item.uuid)}
+            >
+              Deny
+            </a>
+          )}
         </div>
       ),
     },
   ];
 
+  const [sweetAlert, setSweetAlert] = useState({
+    show: false,
+    title: "",
+    text: "",
+    type: "default",
+  });
+
+  const handleSweetAlert = (show, title = "", text = "", type = "") => {
+    setSweetAlert({ show, title, text, type });
+  };
+
   const handleApprove = (uuid) => {
-    console.log("Approve clicked for:", uuid);
     axios
       .post(
         `https://admin.91pharma.in/api/v1/shop-details/activate`,
-        {
-          shop_ids: [uuid],
-        },
+        { shop_ids: [uuid] },
         {
           headers: {
             Authorization: localStorage.getItem("token"),
@@ -91,13 +112,49 @@ const Index = () => {
         }
       )
       .then((response) => {
-        console.log("Activation response:", response.data);
-        // Optionally update your UI or state based on response
-        // For example, refresh data after approval
+        setSweetAlert({
+          show: true,
+          title: "Shop Activated",
+          text: "The shop has been successfully activated!",
+          type: "success",
+        });
       })
       .catch((error) => {
-        console.error("Error activating shop:", error);
-        // Handle errors appropriately
+        setSweetAlert({
+          show: true,
+          title: "Activation Failed",
+          text: "There was an error activating the shop. Please try again.",
+          type: "danger",
+        });
+      });
+  };
+
+  const handleInactive = (uuid) => {
+    axios
+      .post(
+        `https://admin.91pharma.in/api/v1/shop-details/deactivate`,
+        { shop_ids: [uuid] },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((response) => {
+        setSweetAlert({
+          show: true,
+          title: "Shop Deactivated",
+          text: "The shop has been successfully deactivated!",
+          type: "success",
+        });
+      })
+      .catch((error) => {
+        setSweetAlert({
+          show: true,
+          title: "Deactivation Failed",
+          text: "There was an error deactivating the shop. Please try again.",
+          type: "danger",
+        });
       });
   };
 
@@ -133,6 +190,18 @@ const Index = () => {
 
   return (
     <div>
+      <SweetAlert
+        show={sweetAlert.show}
+        title={sweetAlert.title}
+        text={sweetAlert.text}
+        type={sweetAlert.type}
+        onConfirm={() => {
+          handleSweetAlert(false);
+        }}
+        onCancel={() => {
+          handleSweetAlert(false);
+        }}
+      />
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },

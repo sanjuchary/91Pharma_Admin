@@ -12,6 +12,8 @@ const Order = () => {
   const { id } = router.query;
   const [orderData, setOrderData] = useState(null);
 
+  console.log("OrderData", orderData);
+
   const schema = Yup.object().shape({
     user_id: Yup.number().required("User ID is required"),
     amount: Yup.number().required("Amount is required"),
