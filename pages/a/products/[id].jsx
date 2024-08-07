@@ -11,11 +11,18 @@ import {
 } from "../../../helpers/common/dropdownHelper";
 import axios from "../../../utils/axios";
 
-const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
+const Product = ({
+  filters,
+  brands,
+  brandstest,
+  defaultFilter,
+  defaultBrand,
+  images,
+}) => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("ID", id);
+  console.log("brandstest", brandstest);
 
   const [isLoading, setIsLoading] = useState(true);
   const [tab, setTab] = useState(0);
@@ -29,7 +36,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 
   const [values, setValues] = useState([
     {
-      name: "brand_id",
+      name: "product_name",
       label: "Name",
       type: "text",
       placeholder: "Enter Product name",
@@ -37,7 +44,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       customClass: "col-md-6 col-12",
     },
     {
-      name: "price",
+      name: "description",
       label: "Description",
       type: "text",
       placeholder: "Enter Product description",
@@ -45,7 +52,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       customClass: "col-12",
     },
     {
-      name: "category_id",
+      name: "product_id",
       label: "Association Product ID",
       type: "text",
       placeholder: "Enter Product ID",
@@ -115,22 +122,22 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       value: "",
       customClass: "col-md-6 col-12",
     },
-    {
-      name: "image",
-      label: "Image",
-      type: "file",
-      placeholder: "Select Product image",
-      value: "",
-      isSingle: true,
-    },
-    {
-      name: "video",
-      label: "Video",
-      type: "file",
-      placeholder: "Select Product video",
-      value: "",
-      isSingle: true,
-    },
+    // {
+    //   name: "document.url",
+    //   label: "Image",
+    //   type: "file",
+    //   placeholder: "Select Product image",
+    //   value: "",
+    //   isSingle: true,
+    // },
+    // {
+    //   name: "video",
+    //   label: "Video",
+    //   type: "file",
+    //   placeholder: "Select Product video",
+    //   value: "",
+    //   isSingle: true,
+    // },
     {
       name: "category_id",
       label: "Select Category",
@@ -356,7 +363,6 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
         values={values}
         schema={schema}
         isMultiPart={true}
-        redirectUrl="/a/products"
         api={{
           get: { method: "get", url: `/product/get-all?id=${id}` },
           update: { method: "patch", url: `/products/${id}` },
@@ -393,6 +399,60 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 //     },
 //   };
 // }
+
+export async function getServerSideProps({ params }) {
+  const id = params.id;
+  let filters = [];
+  let brands = [];
+  let defaultFilter = "";
+  let defaultBrand = "";
+  let images = [];
+
+  try {
+    // Fetch product details
+    const response = await axios.get(
+      `https://admin.91pharma.in/api/v1/product/get-all?id=${id}`
+    );
+    const product = response.data.data[0]; // Assuming response.data.data is an array and you need the first item
+    defaultFilter = product.category_id || "";
+    defaultBrand = product.brand_id || "";
+    images = product.images || [];
+
+    // Fetch categories options
+    const categoriesResponse = await getOptions({
+      endpoint: "https://admin.91pharma.in/api/v1/category/get-all",
+      label: "category_name",
+      val: "id",
+    });
+    filters = categoriesResponse;
+
+    // Fetch brands options
+    const brandsResponse = await axios.get(
+      "https://admin.91pharma.in/api/v1/brand/get-all"
+    );
+    const brandsData = brandsResponse.data.data.data;
+    brandstest = brandsResponse;
+    console.log("brands", brandsData);
+    brands = brandsData.map((brand) => ({
+      value: brand.id,
+      label: brand.name,
+      image: brand.document ? brand.document.url : null,
+    }));
+  } catch (error) {
+    console.error("Error fetching product data:", error);
+  }
+
+  return {
+    props: {
+      filters,
+      brands,
+      brandstest,
+      defaultFilter,
+      defaultBrand,
+      images,
+    },
+  };
+}
 
 Product.layout = "Admin";
 export default Product;

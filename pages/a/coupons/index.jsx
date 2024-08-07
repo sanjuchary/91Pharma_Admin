@@ -27,6 +27,12 @@ const Index = () => {
     });
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     {
@@ -130,13 +136,39 @@ const Index = () => {
           handleSweetAlert(false);
         }}
       />
-      <BreadCrumb
-        items={[
-          { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Coupons", url: "/a/coupon/all" },
-        ]}
-      />
-
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <BreadCrumb
+          items={[
+            { text: "Dashboard", url: "/a/dashboard" },
+            { text: "Coupons", url: "/a/coupon/all" },
+          ]}
+        />
+        <div
+          className="search-bar"
+          style={{ marginBottom: "20px", width: "30%" }}
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{
+              padding: "10px",
+              width: "100%",
+              maxWidth: "300px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+        </div>
+      </div>
       <Table
         columns={columns}
         url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/coupon/all`}

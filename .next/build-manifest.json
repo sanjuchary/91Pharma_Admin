@@ -25,21 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/a/_middleware": [
+    "/a/credits/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "server/middleware-runtime.js",
-      "server/pages/a/_middleware.js"
-    ],
-    "/a/form-types/create": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/form-types/create.js"
-    ],
-    "/a/ordersReport": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/ordersReport.js"
+      "static/chunks/pages/a/credits/[id].js"
     ],
     "/a/shops": [
       "static/chunks/webpack.js",

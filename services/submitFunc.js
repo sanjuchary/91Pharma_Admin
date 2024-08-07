@@ -368,3 +368,47 @@ export const onSubmitAddCoupon = (e, props, handleSweetAlert) => {
       console.log(err);
     });
 };
+
+export const onSubmitSalesReport = (
+  e,
+  props,
+  fromDate,
+  toDate,
+  handleSweetAlert
+) => {
+  console.log("e", e);
+  console.log("props", props);
+  // Ensure the dates are in the correct format (if needed)
+  const formattedFromDate = new Date(fromDate).toISOString();
+  const formattedToDate = new Date(toDate).toISOString();
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_PROD_API_URL}${props.api.fetch.url}?from_date=${formattedFromDate}&to_date=${formattedToDate}`;
+
+  axios
+    .get(apiUrl, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+    .then((res) => {
+      // Handle the successful response and display the data
+      console.log("Data fetched successfully:", res.data);
+      handleSweetAlert(
+        true,
+        "Success",
+        res?.data?.message || "Data fetched successfully",
+        "success"
+      );
+      // You can return the data or do something else with it
+      return res.data;
+    })
+    .catch((err) => {
+      handleSweetAlert(
+        true,
+        "Error",
+        err?.response?.data?.message || "Failed to fetch data",
+        "error"
+      );
+      console.error("Error fetching data:", err);
+    });
+};

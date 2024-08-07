@@ -20,7 +20,7 @@ const Brand = ({ defaultValue, options }) => {
 
   const values = [
     {
-      name: "phone_number",
+      name: "store_detail.shop_name",
       label: "Shop Name",
       type: "text",
       placeholder: "Enter Shop Name",
@@ -28,7 +28,7 @@ const Brand = ({ defaultValue, options }) => {
       customClass: "col-md-6 col-12",
     },
     {
-      name: "phone_number",
+      name: "store_detail.id",
       label: "Shop ID",
       type: "text",
       placeholder: "Enter Shop ID",
@@ -60,7 +60,7 @@ const Brand = ({ defaultValue, options }) => {
       customClass: "col-md-6",
     },
     {
-      name: "phone_number",
+      name: "store_detail.phone_number",
       label: "Mobile Number",
       type: "text",
       placeholder: "Enter Mobile number",

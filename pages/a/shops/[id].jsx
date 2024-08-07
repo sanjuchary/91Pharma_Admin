@@ -24,6 +24,8 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
     price: Yup.number().required("Price is required"),
   });
 
+  console.log("Images", images);
+
   const [values, setValues] = useState([
     {
       name: "shop_name",
@@ -57,13 +59,21 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       value: "",
       customClass: "col-md-6 col-12",
     },
+    // {
+    //   name: "aadhar_number",
+    //   label: "Aadhar Number",
+    //   type: "number",
+    //   placeholder: "Enter Aadhar Number",
+    //   value: "",
+    //   customClass: "col-md-6 col-12",
+    // },
     {
-      name: "aadhar_number",
-      label: "Aadhar Number",
-      type: "number",
-      placeholder: "Enter Aadhar Number",
-      value: "",
-      customClass: "col-md-6 col-12",
+      name: "aadhar_image",
+      label: "Aadhar Image",
+      type: "file",
+      placeholder: "Select Aadhar image",
+      // value: images.find((img) => img.name === "aadhar_image")?.url || "",
+      isSingle: true,
     },
     {
       name: "aadhar_name",
@@ -228,24 +238,24 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 //   const { id } = context.query;
 
 //   const [data, filters, brands] = await Promise.all([
-//     await axios.get(`/products/${id}`),
-//     await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
-//     await getOptions("brands"),
+//     await axios.get(`https://admin.91pharma.in/api/v1/products/${id}`),
+//     // await getOptions("filters?type=MEDICINE_HEALTH_CONCERN,MEDICINE_CATEGORY"),
+//     // await getOptions("brands"),
 //   ]);
 //   // const defaultFilter
-//   let defaultFilter = data.data.filters.map((row) => {
-//     return { value: row.id, label: row.name };
-//   })[0];
-//   let defaultBrand = data.data.brand;
-//   defaultBrand = { value: defaultBrand.uuid, label: defaultBrand.name };
+//   // let defaultFilter = data.data.filters.map((row) => {
+//   //   return { value: row.id, label: row.name };
+//   // })[0];
+//   // let defaultBrand = data.data.brand;
+//   // defaultBrand = { value: defaultBrand.uuid, label: defaultBrand.name };
 
 //   return {
 //     props: {
-//       filters,
-//       brands,
-//       defaultFilter,
-//       defaultBrand,
-//       images: data.data.images,
+//       // filters,
+//       // brands,
+//       // defaultFilter,
+//       // defaultBrand,
+//       images: data,
 //     },
 //   };
 // }

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
@@ -22,6 +22,12 @@ const Index = () => {
     ) : (
       "No Image"
     );
+  };
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   const columns = useMemo(
@@ -77,13 +83,39 @@ const Index = () => {
 
   return (
     <div>
-      <BreadCrumb
-        items={[
-          { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Banners", url: "/a/banners" },
-        ]}
-      />
-
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <BreadCrumb
+          items={[
+            { text: "Dashboard", url: "/a/dashboard" },
+            { text: "Banners", url: "/a/banners" },
+          ]}
+        />
+        <div
+          className="search-bar"
+          style={{ marginBottom: "20px", width: "30%" }}
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{
+              padding: "10px",
+              width: "100%",
+              maxWidth: "300px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+        </div>
+      </div>
       <Table columns={columns} url={url} buttons={buttons} title="Banners" />
     </div>
   );

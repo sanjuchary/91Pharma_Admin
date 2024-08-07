@@ -4,9 +4,14 @@ import Table from "../../../components/table/Index";
 import Link from "next/link";
 
 const API_URL =
-  process.env.NEXT_PUBLIC_PROD_API_URL || "http://localhost:4000/api/v1";
+  process.env.NEXT_PUBLIC_PROD_API_URL || "https://admin.91pharma.in/api/v1";
 
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   // State to manage order status and table URL
   const [orderStatus, setOrderStatus] = useState("all");
   const [tableUrl, setTableUrl] = useState(`${API_URL}/order/all`);
@@ -172,15 +177,15 @@ const Index = () => {
       text: "S.N.",
     },
     {
-      dataField: "Shop_Name",
+      dataField: "user.store_detail.shop_name",
       text: "Shop Name",
     },
     {
-      dataField: "Phone_Number",
+      dataField: "user.store_detail.phone_number",
       text: "Phone Number",
     },
     {
-      dataField: "Address",
+      dataField: "user.store_detail.city_town",
       text: "Address",
     },
     {
@@ -196,7 +201,7 @@ const Index = () => {
       text: "Delivered date",
     },
     {
-      dataField: "Payment Method",
+      dataField: "payment_method",
       text: "Payment Method",
     },
     {
@@ -219,12 +224,39 @@ const Index = () => {
 
   return (
     <div>
-      <BreadCrumb
-        items={[
-          { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Orders", url: "/a/orders" },
-        ]}
-      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <BreadCrumb
+          items={[
+            { text: "Dashboard", url: "/a/dashboard" },
+            { text: "Orders", url: "/a/orders" },
+          ]}
+        />
+        <div
+          className="search-bar"
+          style={{ marginBottom: "20px", width: "30%" }}
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{
+              padding: "10px",
+              width: "100%",
+              maxWidth: "300px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+        </div>
+      </div>
       <div className="button-group">
         {buttons.map((button) => (
           <button
