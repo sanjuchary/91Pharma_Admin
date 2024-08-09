@@ -25,26 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/a/_middleware": [
+    "/a/deductions": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "server/middleware-runtime.js",
-      "server/pages/a/_middleware.js"
+      "static/chunks/pages/a/deductions.js"
     ],
-    "/a/credits": [
+    "/a/deductions/create": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/a/credits.js"
-    ],
-    "/a/credits/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/credits/[id].js"
-    ],
-    "/a/shops/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/a/shops/[id].js"
+      "static/chunks/pages/a/deductions/create.js"
     ]
   },
   "ampFirstPages": []

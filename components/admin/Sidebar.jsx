@@ -152,26 +152,26 @@ const Sidebar = (props) => {
     },
     {
       name: "Orders",
-      icon: "bx bx-shopping-bag",
+      icon: "bx bx-package",
       url: "/a/orders",
       show: false,
     },
     {
       name: "Shops",
-      icon: "bx bx-shopping-bag",
+      icon: "bx bx-store",
       url: "/a/shops",
       show: false,
     },
 
     {
       name: "Orders Report",
-      icon: "bx bx-user",
+      icon: "bx bxs-report",
       url: "/a/ordersReport",
       show: false,
     },
     {
       name: "Sales Report",
-      icon: "bx bx-user",
+      icon: "bx bxs-report",
       url: "/a/salesReport",
       show: false,
     },
@@ -180,6 +180,108 @@ const Sidebar = (props) => {
       icon: "bx bx-user",
       url: "/a/upload",
       show: false,
+    },
+    {
+      name: "Payments",
+      icon: "bx bx-money-withdraw",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Payment",
+          url: "/a/payments/create",
+        },
+        {
+          name: "All Payments",
+          url: "/a/payments",
+        },
+      ],
+    },
+    {
+      name: "H R M",
+      icon: "",
+      url: "",
+      show: false,
+    },
+    {
+      name: "Employees",
+      icon: "bx bx-user",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Employee",
+          url: "/a/employees/create",
+        },
+        {
+          name: "All Employees",
+          url: "/a/employees",
+        },
+      ],
+    },
+    {
+      name: "Departments",
+      icon: "bx bxs-group",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Department",
+          url: "/a/departments/create",
+        },
+        {
+          name: "All Departments",
+          url: "/a/departments",
+        },
+      ],
+    },
+    {
+      name: "Designation",
+      icon: "bx bxs-group",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Designation",
+          url: "/a/designations/create",
+        },
+        {
+          name: "All Designations",
+          url: "/a/designations",
+        },
+      ],
+    },
+    {
+      name: "Allowances",
+      icon: "bx bxs-group",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Allowance",
+          url: "/a/allowances/create",
+        },
+        {
+          name: "All Allowances",
+          url: "/a/allowances",
+        },
+      ],
+    },
+    {
+      name: "Deductions",
+      icon: "bx bxs-group",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Deduction",
+          url: "/a/deductions/create",
+        },
+        {
+          name: "All Deductions",
+          url: "/a/deductions",
+        },
+      ],
     },
   ]);
 
