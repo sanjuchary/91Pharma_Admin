@@ -21,7 +21,8 @@ const Update = (props) => {
   const [data, setData] = useState({});
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subCategories, setSubCategories] = useState([]);
-  const [imageDataList, setImageDataList] = useState("");
+  const [imageDataList, setImageDataList] = useState([]);
+  const [aadharImage, setAadharImage] = useState(null);
 
   const modifyURL = (url) => {
     return url.replace(
@@ -55,19 +56,27 @@ const Update = (props) => {
       });
       const blob = response.data;
       const base64Image = await convertBlobToBase64(blob);
-      setImageDataList(base64Image);
-      console.log("base", base64Image);
-      return base64Image;
+      // console.log("Fetched base64 image:", base64Image); // Log the base64 image
+      return base64Image; // Ensure you return the base64 image
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   }, []);
 
   useEffect(() => {
-    if (data?.data?.document?.url) {
-      fetchImages(data?.data?.document?.url);
-    }
+    const fetchAllImages = async () => {
+      if (data?.data?.documents) {
+        const imagePromises = data.data.documents.map((doc) => doc.url);
+        const images = await Promise.all(imagePromises);
+        setImageDataList(images);
+        // console.log("All fetched images:", images); // Log the images array
+      }
+    };
+
+    fetchAllImages();
   }, [data, fetchImages]);
+
+  // console.log("Image", imageDataList);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -152,34 +161,143 @@ const Update = (props) => {
     }
   };
 
+  // const getData = () => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.get.url, {
+  //       headers: {
+  //         Authorization: localStorage.getItem("token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       let response = res.data;
+  //       setData(response);
+  //       let formData = {};
+  //       console.log("Values", props.values);
+  //       props.values.map((value) => {
+  //         formData[value.name] = response.data[value.name];
+  //         console.log("red", formData[value.name]);
+  //         if (value.label === "Image") {
+  //           formData[value.name] = response.data.document[value.name];
+  //         }
+  //       });
+  //       reset(formData);
+  //       props.values.map((value) => {
+  //         if (value.defaultValue != "" && value.defaultValue != null) {
+  //           if (value.isMulit) {
+  //             setValue(
+  //               value.name,
+  //               value.defaultValue.map((row) => row.value)
+  //             );
+  //           } else {
+  //             setValue(value.name, value.defaultValue.value);
+  //             console.log("IMage", value.name, value.defaultValue.value);
+  //           }
+  //         }
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // const getData = () => {
+  //   axios
+  //     .get(`${process.env.NEXT_PUBLIC_PROD_API_URL}${props.api.get.url}`, {
+  //       headers: {
+  //         Authorization: localStorage.getItem("token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       const response = res.data;
+  //       setData(response);
+
+  //       // Flatten nested structure
+  //       const formData = {};
+
+  //       props.values.forEach((value) => {
+  //         if (value.name.includes(".")) {
+  //           const keys = value.name.split(".");
+  //           formData[value.name] = keys.reduce(
+  //             (acc, key) => acc && acc[key],
+  //             response.data
+  //           );
+  //         } else {
+  //           formData[value.name] = response.data[value.name];
+  //         }
+  //       });
+
+  //       // Handle image fields
+  //       if (response.data.documents) {
+  //         response.data.documents.forEach((doc) => {
+  //           formData[doc.name] = doc.url;
+  //         });
+  //       }
+
+  //       reset(formData);
+
+  //       props.values.forEach((value) => {
+  //         if (value.defaultValue && value.defaultValue !== "") {
+  //           if (value.isMulti) {
+  //             setValue(
+  //               value.name,
+  //               value.defaultValue.map((row) => row.value)
+  //             );
+  //           } else {
+  //             setValue(value.name, value.defaultValue.value);
+  //           }
+  //         }
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
   const getData = () => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_PROD_API_URL}` + props.api.get.url, {
+      .get(`${process.env.NEXT_PUBLIC_PROD_API_URL}${props.api.get.url}`, {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       })
       .then((res) => {
-        let response = res.data;
+        const response = res.data;
         setData(response);
-        let formData = {};
-        props.values.map((value) => {
-          formData[value.name] = response.data[value.name];
-          if (value.label === "Image") {
-            formData[value.name] = response.data.document[value.name];
+
+        // Flatten nested structure
+        const formData = {};
+
+        props.values.forEach((value) => {
+          if (value.name.includes(".")) {
+            const keys = value.name.split(".");
+            formData[value.name] = keys.reduce(
+              (acc, key) => acc && acc[key],
+              response.data
+            );
+          } else {
+            formData[value.name] = response.data[value.name];
           }
         });
+
+        // Handle image fields
+        if (response.data.documents) {
+          response.data.documents.forEach((doc) => {
+            // Assign URL to formData if the name matches
+            formData[doc.name] = doc.url;
+          });
+        }
+
         reset(formData);
-        props.values.map((value) => {
-          if (value.defaultValue != "" && value.defaultValue != null) {
-            if (value.isMulit) {
+
+        props.values.forEach((value) => {
+          if (value.defaultValue && value.defaultValue !== "") {
+            if (value.isMulti) {
               setValue(
                 value.name,
                 value.defaultValue.map((row) => row.value)
               );
             } else {
               setValue(value.name, value.defaultValue.value);
-              console.log("IMage", value.name, value.defaultValue.value);
             }
           }
         });
@@ -193,7 +311,7 @@ const Update = (props) => {
     props?.api?.get?.url && getData();
   }, []);
 
-  console.log("data_Sub", data);
+  console.log("data_Sub", data.data);
 
   return (
     <div>
@@ -287,15 +405,22 @@ const Update = (props) => {
                 <label id={`form-element-${value.name}`}>{value.label}</label>
                 <div className="row">
                   <div className="col-12">
-                    {imageDataList && (
-                      <Image
-                        src={imageDataList}
-                        alt="image"
-                        className="common_image"
-                        width={500}
-                        height={500}
-                      />
-                    )}
+                    {/* Conditionally render the image based on the field name */}
+                    {data.data?.documents?.map((doc) => {
+                      if (doc.name === value.name) {
+                        return (
+                          <img
+                            key={doc.name}
+                            src={doc.url}
+                            alt={value.label}
+                            className="common_image"
+                            width={500} // Adjust as needed
+                            height={500} // Adjust as needed
+                          />
+                        );
+                      }
+                      return null; // Don't render anything if it doesn't match
+                    })}
                     <input
                       className="form-control"
                       id={`form-element-${value.name}`}

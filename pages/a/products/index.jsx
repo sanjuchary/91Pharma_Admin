@@ -49,6 +49,14 @@ const Index = () => {
       text: "Brand ID",
     },
     {
+      dataField: "category_id",
+      text: "Category ID",
+    },
+    {
+      dataField: "sub_category_id",
+      text: "Sub-Category ID",
+    },
+    {
       dataField: "createdAt",
       text: "Created At",
       type: "datetime",

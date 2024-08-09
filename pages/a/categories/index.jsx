@@ -36,7 +36,7 @@ const Index = () => {
   const columns = [
     { dataField: "serial_number", text: "S.N." },
     {
-      dataField: "uuid",
+      dataField: "id",
       text: "Id",
     },
     {

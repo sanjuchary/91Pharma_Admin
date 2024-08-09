@@ -41,7 +41,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Product description",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "phone_number",
@@ -67,14 +67,14 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
     //   value: "",
     //   customClass: "col-md-6 col-12",
     // },
-    {
-      name: "aadhar_image",
-      label: "Aadhar Image",
-      type: "file",
-      placeholder: "Select Aadhar image",
-      // value: images.find((img) => img.name === "aadhar_image")?.url || "",
-      isSingle: true,
-    },
+    // {
+    //   name: "aadhar_image",
+    //   label: "Aadhar Image",
+    //   type: "file",
+    //   placeholder: "Select Aadhar image",
+    //   // value: images.find((img) => img.name === "aadhar_image")?.url || "",
+    //   isSingle: true,
+    // },
     {
       name: "aadhar_name",
       label: "Aadhar Name",
@@ -99,22 +99,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       value: "",
       customClass: "col-md-6 col-12",
     },
-    {
-      name: "aadhar_image",
-      label: "Aadhar Image",
-      type: "file",
-      placeholder: "Select Aadhar image",
-      value: "",
-      isSingle: true,
-    },
-    {
-      name: "pan_image",
-      label: "Pan Image",
-      type: "file",
-      placeholder: "Select Product video",
-      value: "",
-      isSingle: true,
-    },
+
     {
       name: "opening_time",
       label: "Opening Time",
@@ -176,6 +161,22 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Address",
       value: "",
+    },
+    {
+      name: "aadhar_image",
+      label: "Aadhar Image",
+      type: "file",
+      placeholder: "Select Aadhar image",
+      value: "",
+      isSingle: true,
+    },
+    {
+      name: "pan_image",
+      label: "Pan Image",
+      type: "file",
+      placeholder: "Select Product video",
+      value: "",
+      isSingle: true,
     },
   ]);
 

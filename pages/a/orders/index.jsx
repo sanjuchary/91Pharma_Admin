@@ -27,6 +27,7 @@ const Index = () => {
     cancel: 0,
     return: 0,
     refund: 0,
+    inHouse: 0,
   });
 
   // Fetch order data and count orders by status
@@ -54,6 +55,7 @@ const Index = () => {
             cancel: 0,
             return: 0,
             refund: 0,
+            inHouse: 0,
           };
 
           data.data.forEach((order) => {
@@ -84,6 +86,9 @@ const Index = () => {
                 break;
               case "REFUND":
                 counts.refund++;
+                break;
+              case "INHOUSE":
+                counts.inHouse++;
                 break;
               default:
                 break;
@@ -131,6 +136,9 @@ const Index = () => {
       case "refund":
         url = `${API_URL}/order/all?status=REFUND`;
         break;
+      case "inHouse":
+        url = `${API_URL}/order/all?status=INHOUSE`;
+        break;
       default:
         url = `${API_URL}/order/all`;
     }
@@ -163,6 +171,7 @@ const Index = () => {
     { text: `Cancelled Orders (${orderCounts.cancel})`, status: "cancel" },
     { text: `Returned Orders (${orderCounts.return})`, status: "return" },
     { text: `Refunded Orders (${orderCounts.refund})`, status: "refund" },
+    { text: `InHouse Orders (${orderCounts.inHouse})`, status: "inHouse" },
   ];
 
   // Handle button click to set the order status

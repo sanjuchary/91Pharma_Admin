@@ -6,10 +6,23 @@ import { Bar, Doughnut } from "react-chartjs-2";
 import chartData from "../../../utils/data.json";
 
 const Index = () => {
+  // Get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const dd = String(today.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDate, setSelectedDate] = useState(getTodayDate());
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
   };
 
   return (
@@ -25,7 +38,14 @@ const Index = () => {
         <h1>Dashboard</h1>
         <div
           className="search-bar"
-          style={{ marginBottom: "20px", width: "30%" }}
+          style={{
+            marginBottom: "20px",
+            width: "30%",
+            display: "flex",
+            flexDirection: "row",
+            // alignItems: "center",
+            gap: 20,
+          }}
         >
           <input
             type="text"
@@ -34,8 +54,18 @@ const Index = () => {
             onChange={handleSearchChange}
             style={{
               padding: "10px",
-              width: "100%",
-              maxWidth: "300px",
+              width: 180, // Adjust width
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            style={{
+              padding: "10px",
+              width: "100%", // Adjust width
               borderRadius: "4px",
               border: "1px solid #ccc",
             }}

@@ -56,6 +56,15 @@ const Table = (props) => {
     } else if (column.dataField === "is_active") {
       // Handle boolean value display
       return value ? "Yes" : "No";
+    } else if (column.dataField === "due_amount") {
+      // Calculate due amount: sanction_amount - wallet_balance
+      const sanctionAmount =
+        parseFloat(getNestedValue(item, "sanction_amount")) || 0;
+      const walletBalance =
+        parseFloat(getNestedValue(item, "wallet_balance")) || 0;
+      const dueAmount = sanctionAmount - walletBalance;
+
+      return dueAmount.toFixed(2); // Return due amount formatted to two decimal places
     }
 
     return value;

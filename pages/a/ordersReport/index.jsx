@@ -24,7 +24,7 @@ const Index = () => {
     // { dataField: "status", text: "Status" },
     { dataField: "id", text: "S.N." },
     { dataField: "order.uuid", text: "Shop ID" },
-    { dataField: "order.user?.store_detail", text: "Shop Name" },
+    { dataField: "order.user..store_detail", text: "Shop Name" },
     { dataField: "order.user.first_name", text: "First Name" },
     { dataField: "order.user.email", text: "Email" },
     { dataField: "order.user?.store_detail", text: "Address" },

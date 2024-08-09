@@ -52,13 +52,21 @@ const Brand = ({ defaultValue, options }) => {
     //   defaultValue: defaultValue,
     // },
     {
-      name: "image",
-      label: "Image",
+      name: "brand_image",
+      label: "Brand Image",
       type: "file",
       placeholder: "Enter brand image",
       value: "",
       isSingle: true,
     },
+    // {
+    //   name: "aadhar_image",
+    //   label: "Aadhar Image",
+    //   type: "file",
+    //   placeholder: "Select Aadhar image",
+    //   value: "",
+    //   isSingle: true,
+    // },
   ];
 
   return (

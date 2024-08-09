@@ -11,18 +11,11 @@ import {
 } from "../../../helpers/common/dropdownHelper";
 import axios from "../../../utils/axios";
 
-const Product = ({
-  filters,
-  brands,
-  brandstest,
-  defaultFilter,
-  defaultBrand,
-  images,
-}) => {
+const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("brandstest", brandstest);
+  // console.log("brandstest", brandstest);
 
   const [isLoading, setIsLoading] = useState(true);
   const [tab, setTab] = useState(0);
@@ -431,7 +424,7 @@ export async function getServerSideProps({ params }) {
       "https://admin.91pharma.in/api/v1/brand/get-all"
     );
     const brandsData = brandsResponse.data.data.data;
-    brandstest = brandsResponse;
+    // brandstest = brandsResponse;
     console.log("brands", brandsData);
     brands = brandsData.map((brand) => ({
       value: brand.id,
@@ -446,7 +439,7 @@ export async function getServerSideProps({ params }) {
     props: {
       filters,
       brands,
-      brandstest,
+      // brandstest,
       defaultFilter,
       defaultBrand,
       images,

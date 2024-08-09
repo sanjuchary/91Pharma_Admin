@@ -17,6 +17,19 @@ const Index = () => {
 
     { dataField: "first_name", text: "Name" },
     { dataField: "email", text: "email" },
+    { dataField: "shopName", text: "Shop" },
+    {
+      dataField: "sanction_amount",
+      text: "Credit Limit",
+    },
+    {
+      dataField: "wallet_balance",
+      text: "Wallet Balance",
+    },
+    {
+      dataField: "due_amount",
+      text: "Due Amount",
+    },
     {
       dataField: "createdAt",
       text: "Created At",
