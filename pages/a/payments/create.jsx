@@ -17,7 +17,7 @@ const Payments = () => {
       type: "text",
       placeholder: "Enter Shop Id",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "discount",
@@ -25,7 +25,7 @@ const Payments = () => {
       type: "number",
       placeholder: "Enter Shop Name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "min_value",
@@ -33,7 +33,7 @@ const Payments = () => {
       type: "number",
       placeholder: "Enter collector id",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "max_value",
@@ -41,7 +41,7 @@ const Payments = () => {
       type: "number",
       placeholder: "Enter Collector name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "max_amount",
@@ -49,22 +49,8 @@ const Payments = () => {
       type: "number",
       placeholder: "Enter Amount paid",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
-    // {
-    //   name: "payment_mode",
-    //   label: "Payment Mode",
-    //   type: "select",
-    //   options: [
-    //     { value: "cash", label: "Cash" },
-    //     { value: "cheque", label: "Cheque" },
-    //     { value: "transfer", label: "Transfer" },
-    //   ],
-    //   placeholder: "Select Payment Mode",
-    //   value: paymentMode,
-    //   onChange: handlePaymentModeChange,
-    //   customClass: "col-md-6 col-12",
-    // },
     ...(paymentMode === "cheque"
       ? [
           {
@@ -73,7 +59,7 @@ const Payments = () => {
             type: "text",
             placeholder: "Enter Cheque Number",
             value: "",
-            customClass: "col-md-6 col-12",
+            customClass: "col-md-3 col-12",
           },
           {
             name: "cheque_date",
@@ -81,7 +67,7 @@ const Payments = () => {
             type: "date",
             placeholder: "Enter Cheque Date",
             value: "",
-            customClass: "col-md-6 col-12",
+            customClass: "col-md-3 col-12",
           },
         ]
       : []),
@@ -93,7 +79,7 @@ const Payments = () => {
             type: "text",
             placeholder: "Enter Bank Name",
             value: "",
-            customClass: "col-md-6 col-12",
+            customClass: "col-md-3 col-12",
           },
           {
             name: "bank_number",
@@ -101,7 +87,7 @@ const Payments = () => {
             type: "text",
             placeholder: "Enter Bank Number",
             value: "",
-            customClass: "col-md-6 col-12",
+            customClass: "col-md-3 col-12",
           },
         ]
       : []),
@@ -111,7 +97,7 @@ const Payments = () => {
       type: "text",
       placeholder: "Enter Remarks",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
   ];
 

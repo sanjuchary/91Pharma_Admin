@@ -56,7 +56,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Shop Name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "phone_number",
@@ -64,7 +64,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Shop ID",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "first_name",
@@ -72,7 +72,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter First name",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "last_name",
@@ -80,7 +80,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "email",
@@ -88,7 +88,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "phone_number",
@@ -96,7 +96,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Mobile number",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "wallet_balance",
@@ -104,7 +104,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "referral_code",
@@ -112,7 +112,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "sanction_credit",
@@ -120,7 +120,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "sanction_amount",
@@ -128,7 +128,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "due",
@@ -136,7 +136,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Due Amount",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
   ];
 

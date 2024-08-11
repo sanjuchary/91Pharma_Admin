@@ -25,7 +25,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Shop Name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "store_detail.id",
@@ -33,7 +33,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Shop ID",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "first_name",
@@ -41,7 +41,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter First name",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "last_name",
@@ -49,7 +49,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "email",
@@ -57,7 +57,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "store_detail.phone_number",
@@ -65,7 +65,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Mobile number",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "wallet_balance",
@@ -73,7 +73,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "referral_code",
@@ -81,7 +81,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "sanction_credit",
@@ -89,7 +89,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "sanction_amount",
@@ -97,7 +97,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Last Limit",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
     {
       name: "due",
@@ -105,7 +105,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter Due Amount",
       value: "",
-      customClass: "col-md-6",
+      customClass: "col-md-3",
     },
   ];
 

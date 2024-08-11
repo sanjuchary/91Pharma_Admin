@@ -11,7 +11,7 @@ import {
 } from "../../../helpers/common/dropdownHelper";
 import axios from "../../../utils/axios";
 
-const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
+const Product = ({ categories, brands, subCategories }) => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -29,12 +29,12 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
 
   const [values, setValues] = useState([
     {
-      name: "product_name",
+      name: "name",
       label: "Name",
       type: "text",
       placeholder: "Enter Product name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "description",
@@ -42,15 +42,15 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Product description",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "product_id",
-      label: "Association Product ID",
+      label: "Product ID",
       type: "text",
       placeholder: "Enter Product ID",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -58,7 +58,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product MRP",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -66,7 +66,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product PTR",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -74,7 +74,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product Net Price",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "discount",
@@ -82,7 +82,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product discount",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "igst",
@@ -90,7 +90,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product IGST",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "context",
@@ -98,6 +98,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Product context",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "hsn",
@@ -105,7 +106,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Product HSN",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "quantity",
@@ -113,40 +114,75 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Product quantity",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
-    // {
-    //   name: "document.url",
-    //   label: "Image",
-    //   type: "file",
-    //   placeholder: "Select Product image",
-    //   value: "",
-    //   isSingle: true,
-    // },
-    // {
-    //   name: "video",
-    //   label: "Video",
-    //   type: "file",
-    //   placeholder: "Select Product video",
-    //   value: "",
-    //   isSingle: true,
-    // },
     {
-      name: "category_id",
-      label: "Select Category",
-      type: "select",
-      placeholder: "Select Category",
-      defaultValue: defaultFilter,
+      name: "product_images",
+      label: "Image",
+      type: "file",
+      placeholder: "Select Product image",
       value: "",
-      options: filters,
+      isSingle: true,
     },
     {
       name: "brand_id",
       label: "Select Brand",
       type: "select",
       placeholder: "Select Brand",
-      defaultValue: defaultBrand,
+      defaultValue: null,
       options: brands,
+      isMulti: false,
+    },
+    {
+      name: "category_id",
+      label: "Select Category",
+      type: "select",
+      placeholder: "Select Category",
+      defaultValue: null,
+      value: "",
+      options: categories,
+      isMulti: false,
+    },
+    {
+      name: "sub_category_id",
+      label: "Select Sub Category",
+      type: "select",
+      placeholder: "Select Sub Category",
+      defaultValue: null,
+      options: subCategories,
+      isMulti: false,
+    },
+    {
+      name: "composition",
+      label: "Composition",
+      type: "text",
+      placeholder: "Enter Product composition",
+      value: "",
+      customClass: "col-md-6 col-12",
+    },
+    {
+      name: "packing_type",
+      label: "Packing Type",
+      type: "text",
+      placeholder: "Enter Product Packing type",
+      value: "",
+      customClass: "col-md-3 col-12",
+    },
+    {
+      name: "packing_size",
+      label: "Packing Size",
+      type: "text",
+      placeholder: "Enter Product Packing Size",
+      value: "",
+      customClass: "col-md-3 col-12",
+    },
+    {
+      name: "schedule",
+      label: "Schedule",
+      type: "text",
+      placeholder: "Enter Product Schedule",
+      value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "usage",
@@ -154,6 +190,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Product usage",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "about_salt",
@@ -161,12 +198,14 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Product about salt",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "mechanism_of_action",
       label: "Mechanism of Action",
       type: "textarea",
       placeholder: "Enter Product mechanism of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -174,6 +213,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Pharmacokinets",
       type: "textarea",
       placeholder: "Enter Product pharmacokinets",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -181,6 +221,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Onset of Action",
       type: "textarea",
       placeholder: "Enter Product onset of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -188,6 +229,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Duration of Action",
       type: "textarea",
       placeholder: "Enter Product duration of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -195,6 +237,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Half Life",
       type: "textarea",
       placeholder: "Enter Product half life",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -202,6 +245,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Side Effects",
       type: "textarea",
       placeholder: "Enter Product side effects",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -209,6 +253,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Contra Indications",
       type: "textarea",
       placeholder: "Enter Product contra indications",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -216,6 +261,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Special Precautions",
       type: "textarea",
       placeholder: "Enter Product special precautions",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -223,6 +269,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Pregnancy Related Information",
       type: "textarea",
       placeholder: "Enter Product pregnancy related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -230,6 +277,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Product Alchol Interaction",
       type: "textarea",
       placeholder: "Enter Product product alchol interaction",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -237,6 +285,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Old Age Related Information",
       type: "textarea",
       placeholder: "Enter Product old age related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -244,6 +293,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Breast Feeding Related Information",
       type: "textarea",
       placeholder: "Enter Product breast feeding related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -251,6 +301,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Child Related Information",
       type: "textarea",
       placeholder: "Enter Product child related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -258,6 +309,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Indications",
       type: "textarea",
       placeholder: "Enter Product indications",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -265,6 +317,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Interactions",
       type: "textarea",
       placeholder: "Enter Product interactions",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -272,6 +325,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Typical Dosage",
       type: "textarea",
       placeholder: "Enter Product typical dosage",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -279,6 +333,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Storage Requirements",
       type: "textarea",
       placeholder: "Enter Product storage requirements",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -286,6 +341,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Effects Mixed Dosage",
       type: "textarea",
       placeholder: "Enter Product effects mixed dosage",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -293,6 +349,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Effects Overdose",
       type: "textarea",
       placeholder: "Enter Product effects overdose",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -300,6 +357,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Expertise Advice",
       type: "textarea",
       placeholder: "Enter Product expertise advice",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -307,6 +365,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "How to Use",
       type: "textarea",
       placeholder: "Enter Product how to use",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -314,6 +373,7 @@ const Product = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "FAQs",
       type: "textarea",
       placeholder: "Enter Product faqs",
+      customClass: "col-md-6 col-12",
       value: "",
     },
   ]);

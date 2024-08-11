@@ -33,6 +33,10 @@ const Index = () => {
       text: "Mobile Number",
     },
     {
+      dataField: "credit_limit",
+      text: "Credit Limit",
+    },
+    {
       dataField: "is_active",
       text: "Is Active",
       formatter: (cell) => {

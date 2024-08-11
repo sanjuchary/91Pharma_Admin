@@ -35,7 +35,7 @@ const Category = ({ filters, types, defaultValueFilter, defaultValueType }) => {
       type: "text",
       placeholder: "Enter category name",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "image",

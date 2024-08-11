@@ -14,7 +14,7 @@ const Coupon = () => {
       type: "text",
       placeholder: "Enter Form Type",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
   ];
 

@@ -18,7 +18,7 @@ const subCategory = ({ categories }) => {
       type: "text",
       placeholder: "Enter Category name",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     // {
     //   name: "parentId",

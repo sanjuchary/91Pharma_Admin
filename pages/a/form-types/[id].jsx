@@ -18,52 +18,12 @@ const Coupon = () => {
 
   const values = [
     {
-      name: "code",
-      label: "Code",
+      name: "form_type",
+      label: "Form Type",
       type: "text",
-      placeholder: "Enter coupon Code",
+      placeholder: "Enter Form Type",
       value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "discount",
-      label: "Discount",
-      type: "number",
-      placeholder: "Enter discount",
-      value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "min_value",
-      label: "Min Value",
-      type: "number",
-      placeholder: "Enter min value",
-      value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "max_value",
-      label: "Max Value",
-      type: "number",
-      placeholder: "Enter max value",
-      value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "max_amount",
-      label: "Max Amount",
-      type: "number",
-      placeholder: "Enter max amount",
-      value: "",
-      customClass: "col-12",
-    },
-    {
-      name: "expiry_date",
-      label: "Expiry Date",
-      type: "date",
-      placeholder: "Enter expiry date",
-      value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
   ];
 

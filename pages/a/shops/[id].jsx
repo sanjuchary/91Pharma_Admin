@@ -33,7 +33,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Product name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "email",
@@ -41,7 +41,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Product description",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "phone_number",
@@ -49,7 +49,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Mobile number",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "whatsapp_number",
@@ -57,7 +57,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "number",
       placeholder: "Enter Whatsapp Number",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     // {
     //   name: "aadhar_number",
@@ -80,16 +80,16 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       label: "Aadhar Name",
       type: "text",
       placeholder: "Enter Aadhar Name",
+      customClass: "col-md-3 col-12",
       value: "",
-      customClass: "col-md-6 col-12",
     },
     {
       name: "pan_number",
       label: "Pan Number",
       type: "text",
       placeholder: "Enter Pan Number",
+      customClass: "col-md-3 col-12",
       value: "",
-      customClass: "col-md-6 col-12",
     },
     {
       name: "pan_name",
@@ -106,7 +106,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Opening Time",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "closing_time",
@@ -114,7 +114,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Closing Time",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "gst_number",
@@ -122,7 +122,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Gst Number",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "business_ownership.type",
@@ -130,7 +130,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter Business Type",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "state_name",
@@ -138,7 +138,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter State",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "city_town",
@@ -146,7 +146,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "text",
       placeholder: "Enter City",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "address_line1",
@@ -154,6 +154,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Address",
       value: "",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "address_line2",
@@ -161,6 +162,7 @@ const Shop = ({ filters, brands, defaultFilter, defaultBrand, images }) => {
       type: "textarea",
       placeholder: "Enter Address",
       value: "",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "aadhar_image",

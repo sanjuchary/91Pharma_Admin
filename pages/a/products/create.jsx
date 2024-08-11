@@ -38,7 +38,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product name",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "description",
@@ -46,7 +46,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product description",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "product_id",
@@ -54,7 +54,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product ID",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -62,7 +62,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product MRP",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -70,7 +70,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product PTR",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "price",
@@ -78,7 +78,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product Net Price",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "discount",
@@ -86,7 +86,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product discount",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "igst",
@@ -94,7 +94,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product IGST",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "context",
@@ -102,6 +102,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "textarea",
       placeholder: "Enter Product context",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "hsn",
@@ -109,7 +110,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product HSN",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "quantity",
@@ -117,7 +118,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "number",
       placeholder: "Enter Product quantity",
       value: "",
-      customClass: "col-md-6 col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "product_images",
@@ -161,7 +162,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product composition",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "packing_type",
@@ -169,7 +170,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product Packing type",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "packing_size",
@@ -177,7 +178,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product Packing Size",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "schedule",
@@ -185,7 +186,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "text",
       placeholder: "Enter Product Schedule",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "usage",
@@ -193,6 +194,7 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "textarea",
       placeholder: "Enter Product usage",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "about_salt",
@@ -200,12 +202,14 @@ const Product = ({ categories, brands, subCategories }) => {
       type: "textarea",
       placeholder: "Enter Product about salt",
       value: "",
+      customClass: "col-md-6 col-12",
     },
     {
       name: "mechanism_of_action",
       label: "Mechanism of Action",
       type: "textarea",
       placeholder: "Enter Product mechanism of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -213,6 +217,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Pharmacokinets",
       type: "textarea",
       placeholder: "Enter Product pharmacokinets",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -220,6 +225,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Onset of Action",
       type: "textarea",
       placeholder: "Enter Product onset of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -227,6 +233,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Duration of Action",
       type: "textarea",
       placeholder: "Enter Product duration of action",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -234,6 +241,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Half Life",
       type: "textarea",
       placeholder: "Enter Product half life",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -241,6 +249,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Side Effects",
       type: "textarea",
       placeholder: "Enter Product side effects",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -248,6 +257,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Contra Indications",
       type: "textarea",
       placeholder: "Enter Product contra indications",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -255,6 +265,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Special Precautions",
       type: "textarea",
       placeholder: "Enter Product special precautions",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -262,6 +273,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Pregnancy Related Information",
       type: "textarea",
       placeholder: "Enter Product pregnancy related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -269,6 +281,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Product Alchol Interaction",
       type: "textarea",
       placeholder: "Enter Product product alchol interaction",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -276,6 +289,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Old Age Related Information",
       type: "textarea",
       placeholder: "Enter Product old age related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -283,6 +297,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Breast Feeding Related Information",
       type: "textarea",
       placeholder: "Enter Product breast feeding related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -290,6 +305,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Child Related Information",
       type: "textarea",
       placeholder: "Enter Product child related information",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -297,6 +313,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Indications",
       type: "textarea",
       placeholder: "Enter Product indications",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -304,6 +321,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Interactions",
       type: "textarea",
       placeholder: "Enter Product interactions",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -311,6 +329,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Typical Dosage",
       type: "textarea",
       placeholder: "Enter Product typical dosage",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -318,6 +337,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Storage Requirements",
       type: "textarea",
       placeholder: "Enter Product storage requirements",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -325,6 +345,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Effects Mixed Dosage",
       type: "textarea",
       placeholder: "Enter Product effects mixed dosage",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -332,6 +353,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Effects Overdose",
       type: "textarea",
       placeholder: "Enter Product effects overdose",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -339,6 +361,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "Expertise Advice",
       type: "textarea",
       placeholder: "Enter Product expertise advice",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -346,6 +369,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "How to Use",
       type: "textarea",
       placeholder: "Enter Product how to use",
+      customClass: "col-md-6 col-12",
       value: "",
     },
     {
@@ -353,6 +377,7 @@ const Product = ({ categories, brands, subCategories }) => {
       label: "FAQs",
       type: "textarea",
       placeholder: "Enter Product faqs",
+      customClass: "col-md-6 col-12",
       value: "",
     },
   ];

@@ -34,7 +34,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter user id",
       value: orderData?.user_id || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "amount",
@@ -42,7 +42,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter amount",
       value: orderData?.amount || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "shipping_charge",
@@ -50,7 +50,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter shipping charge",
       value: orderData?.shipping_charge || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "tax_percentage",
@@ -58,7 +58,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter tax percentage",
       value: orderData?.tax_percentage || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "tax_amount",
@@ -66,7 +66,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter tax amount",
       value: orderData?.tax_amount || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "total_amount",
@@ -74,7 +74,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter total amount",
       value: orderData?.total_amount || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "shipping_address",
@@ -82,7 +82,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter shipping address",
       value: orderData?.shipping_address || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "billing_address",
@@ -90,7 +90,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter billing address",
       value: orderData?.billing_address || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "payment_method",
@@ -98,7 +98,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter payment method",
       value: orderData?.payment_method || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "status",
@@ -106,7 +106,7 @@ const Order = () => {
       type: "text",
       placeholder: "Enter status",
       value: orderData?.status || "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
   ];
 

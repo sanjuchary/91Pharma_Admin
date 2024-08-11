@@ -31,7 +31,7 @@ const subCategory = ({
       type: "text",
       placeholder: "Enter Sub-Category name",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-3 col-12",
     },
     {
       name: "image",

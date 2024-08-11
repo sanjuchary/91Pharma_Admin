@@ -128,6 +128,22 @@ const Sidebar = (props) => {
         },
       ],
     },
+    {
+      name: "Expiry",
+      icon: "bx bx-time",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Expiry",
+          url: "/a/expiry/create",
+        },
+        {
+          name: "All Expiries",
+          url: "/a/expiry",
+        },
+      ],
+    },
     // {
     //   name: "Credit",
     //   icon: "bx bx-capsule",
@@ -295,8 +311,8 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className="layout__admin__sidebar col-12 col-md-auto">
-      <SimpleBar style={{ maxHeight: "100vh", minWidth: "35vh" }}>
+    <div className="layout__admin__sidebar col-12 col-md-auto ">
+      <SimpleBar style={{ maxHeight: "150vh", minWidth: "35vh" }}>
         <div className="layout__admin__content h-100 p-3">
           <div className="layout__sidebar">
             <div className="d-flex justify-content-end d-md-none">

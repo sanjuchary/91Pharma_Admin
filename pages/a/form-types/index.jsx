@@ -49,7 +49,7 @@ const Index = () => {
 
   const buttons = [
     {
-      text: "Add Coupon",
+      text: "Add Form-Type",
       url: "/a/form-types/create",
       color: "dark",
       type: "button",

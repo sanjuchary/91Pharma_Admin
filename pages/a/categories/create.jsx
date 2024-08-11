@@ -56,7 +56,7 @@ const Category = ({ filters, types }) => {
       type: "text",
       placeholder: "Enter Category name",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     // {
     //   name: "type",

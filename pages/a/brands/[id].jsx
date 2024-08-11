@@ -25,7 +25,7 @@ const Brand = ({ defaultValue, options }) => {
       type: "text",
       placeholder: "Enter brand name",
       value: "",
-      customClass: "col-12",
+      customClass: "col-md-6 col-12",
     },
     // {
     //   name: "description",
