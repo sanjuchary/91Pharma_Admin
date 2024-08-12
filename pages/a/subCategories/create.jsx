@@ -64,7 +64,7 @@ const subCategory = ({ categories }) => {
       <BreadCrumb
         items={[
           { text: "Dashboard", url: "/a/dashboard" },
-          { text: "Category", url: "/a/subCategories" },
+          { text: "Sub Category Create", url: "/a/subCategories" },
         ]}
       />
       <Form

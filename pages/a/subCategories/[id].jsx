@@ -1,27 +1,17 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Form from "../../../components/form/update";
-import {
-  getOptions,
-  getDefaultValue,
-  getDefaultValueForType,
-} from "../../../helpers/common/dropdownHelper";
+import axios from "axios";
 
-const subCategory = ({
-  filters,
-  types,
-  defaultValueFilter,
-  defaultValueType,
-}) => {
+const SubCategory = ({ categories, subCategoryData }) => {
   const router = useRouter();
   const { id } = router.query;
-  console.log("subId", id);
+
+  console.log("log", subCategoryData.category.name);
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    // type: Yup.string().required("Type is required"),
   });
 
   const values = [
@@ -30,21 +20,31 @@ const subCategory = ({
       label: "Sub-Category Name",
       type: "text",
       placeholder: "Enter Sub-Category name",
-      value: "",
+      value: subCategoryData?.name || "",
+      customClass: "col-md-3 col-12",
+    },
+    {
+      name: "category_id",
+      label: "Select Parent Category",
+      type: "select",
+      placeholder: "Select Category",
+      defaultValue: "NO",
+      value: "O",
+      options: categories.data, // Use the processed category options
+      isMulti: false,
       customClass: "col-md-3 col-12",
     },
     {
       name: "image",
       label: "Image",
       type: "file",
-      placeholder: "Enter category image",
+      placeholder: "Upload category image",
       value: "",
       isSingle: true,
     },
   ];
 
   return (
-    //react hook form
     <div>
       <BreadCrumb
         items={[
@@ -52,7 +52,7 @@ const subCategory = ({
           { text: "Categories", url: "/a/subCategories" },
         ]}
       />
-      {id != undefined && (
+      {id && (
         <Form
           values={values}
           schema={schema}
@@ -62,32 +62,59 @@ const subCategory = ({
               method: "get",
               url: `/sub-category/get/by/${id}`,
             },
-            // update: { method: "patch", url: `/filters/${id}` },
           }}
         />
       )}
     </div>
   );
 };
-// export async function getServerSideProps(context) {
-//   const { id } = context.query;
 
-//   const [filters, types, defaultValueFilter, defaultValueType] =
-//     await Promise.all([
-//       await getOptions("filters/list", "name", "uuid", false),
-//       await getOptions("filters/types", "name", "value", true),
-//       await getDefaultValue("filters", "parent", id),
-//       await getDefaultValueForType("filters", id),
-//     ]);
+export async function getServerSideProps(context) {
+  const token = context.req.cookies.token;
+  const { id } = context.query;
 
-//   return {
-//     props: {
-//       filters: filters,
-//       types: types,
-//       defaultValueFilter: defaultValueFilter,
-//       defaultValueType: defaultValueType,
-//     },
-//   };
-// }
-subCategory.layout = "Admin";
-export default subCategory;
+  try {
+    // Fetch all categories
+    const categoriesResponse = await axios.get(
+      `${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    const categories = categoriesResponse.data?.data || [];
+
+    // Fetch specific sub-category data
+    const subCategoryResponse = await axios.get(
+      `${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get/by/${id}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    const subCategoryData = subCategoryResponse.data?.data;
+
+    return {
+      props: {
+        categories,
+        subCategoryData,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    return {
+      props: {
+        categories: [],
+        subCategoryData: null,
+      },
+    };
+  }
+}
+
+SubCategory.layout = "Admin";
+export default SubCategory;
