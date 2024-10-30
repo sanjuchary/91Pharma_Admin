@@ -3,7 +3,7 @@ import Table from "../../../components/table/Index";
 import Link from "next/link";
 import SweetAlert from "../../../components/common/SweetAlert";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const API_URL =
@@ -28,10 +28,19 @@ const Index = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [url, setUrl] = useState(`${API_URL}/category/get-all`);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  // Update the URL whenever the search term changes
+  useEffect(() => {
+    const searchQuery = searchTerm
+      ? `?is_active=true&search=${searchTerm}`
+      : "";
+    setUrl(`${API_URL}/category/get-all${searchQuery}`);
+  }, [searchTerm]);
 
   const columns = [
     { dataField: "serial_number", text: "S.N." },
@@ -74,8 +83,13 @@ const Index = () => {
       type: "render",
       render: (item) => (
         <div>
+          {/* <Link href={`/a/categories/${item.id}`}>
+            <a className="btn btn-dark btn-sm">View Sub Categories</a>
+          </Link> */}
           <Link href={`/a/categories/${item.id}`}>
-            <a className="btn btn-dark btn-sm">View Details</a>
+            <a className="btn btn-dark btn-sm" style={{ marginLeft: "10px" }}>
+              View Details
+            </a>
           </Link>
           <a
             className="btn btn-dark btn-sm"
@@ -182,7 +196,8 @@ const Index = () => {
       </div>
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`}
+        // url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/category/get-all`}
+        url={url}
         buttons={buttons}
         title="Categories"
       />

@@ -2,7 +2,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SweetAlert from "../../../components/common/SweetAlert";
 import axios from "axios";
 
@@ -28,10 +28,19 @@ const Index = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [url, setUrl] = useState(`${API_URL}/sub-category/get-all`);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  // Update the URL whenever the search term changes
+  useEffect(() => {
+    const searchQuery = searchTerm
+      ? `?is_active=true&search=${searchTerm}`
+      : "";
+    setUrl(`${API_URL}/sub-category/get-all${searchQuery}`);
+  }, [searchTerm]);
 
   const columns = [
     { dataField: "serial_number", text: "S.N." },
@@ -171,7 +180,8 @@ const Index = () => {
       </div>
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get-all`}
+        // url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/sub-category/get-all`}
+        url={url}
         buttons={buttons}
         title="SubCategories"
       />

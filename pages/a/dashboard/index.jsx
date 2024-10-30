@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Doughnut } from "react-chartjs-2";
@@ -16,6 +16,12 @@ const Index = () => {
   };
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState(getTodayDate());
+  const [dashboardData, setDashboardData] = useState({
+    statusCounts: {},
+    data: [],
+    pagination: {},
+  });
+  const [loading, setLoading] = useState(true);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -23,6 +29,23 @@ const Index = () => {
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      const response = await axios.get("{{API_URL}}/order/dashboard");
+      if (response.data.success) {
+        setDashboardData(response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching dashboard data", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -73,7 +96,7 @@ const Index = () => {
         </div>
       </div>
       <div className="d-flex flex-wrap gap-3">
-        <div
+        {/* <div
           className="bg-light rounded justify-content-center"
           style={{
             color: "#000",
@@ -84,7 +107,7 @@ const Index = () => {
         >
           <h5>Total Sellers</h5>
           <h3>12</h3>
-        </div>
+        </div> */}
         <div
           className="bg-light rounded justify-content-center"
           style={{
@@ -95,7 +118,7 @@ const Index = () => {
           }}
         >
           <h5>Total Orders</h5>
-          <h3>12</h3>
+          <h3>{dashboardData?.statusCounts?.All_Orders || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -107,7 +130,67 @@ const Index = () => {
           }}
         >
           <h5>Total Pending Orders</h5>
-          <h3>12</h3>
+          <h3>{dashboardData?.statusCounts?.PENDING || 0}</h3>
+        </div>
+        <div
+          className="bg-light rounded justify-content-center"
+          style={{
+            color: "#000",
+            padding: 20,
+            flex: "1 1 calc(25% - 1rem)",
+            boxSizing: "border-box",
+          }}
+        >
+          <h5>Total Confirmed Orders</h5>
+          <h3>{dashboardData?.statusCounts?.CONFIRMED || 0}</h3>
+        </div>
+        <div
+          className="bg-light rounded justify-content-center"
+          style={{
+            color: "#000",
+            padding: 20,
+            flex: "1 1 calc(25% - 1rem)",
+            boxSizing: "border-box",
+          }}
+        >
+          <h5>Total Processing Orders</h5>
+          <h3>{dashboardData?.statusCounts?.PROCESSING || 0}</h3>
+        </div>
+        <div
+          className="bg-light rounded justify-content-center"
+          style={{
+            color: "#000",
+            padding: 20,
+            flex: "1 1 calc(25% - 1rem)",
+            boxSizing: "border-box",
+          }}
+        >
+          <h5>Total Shipping Orders</h5>
+          <h3>{dashboardData?.statusCounts?.SHIPPING || 0}</h3>
+        </div>
+        <div
+          className="bg-light rounded justify-content-center"
+          style={{
+            color: "#000",
+            padding: 20,
+            flex: "1 1 calc(25% - 1rem)",
+            boxSizing: "border-box",
+          }}
+        >
+          <h5>Total Shipped Orders</h5>
+          <h3>{dashboardData?.statusCounts?.SHIPPED || 0}</h3>
+        </div>
+        <div
+          className="bg-light rounded justify-content-center"
+          style={{
+            color: "#000",
+            padding: 20,
+            flex: "1 1 calc(25% - 1rem)",
+            boxSizing: "border-box",
+          }}
+        >
+          <h5>Total Delivered Orders</h5>
+          <h3>{dashboardData?.statusCounts?.DELIVERED || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -119,7 +202,7 @@ const Index = () => {
           }}
         >
           <h5>Total Completed Orders</h5>
-          <h3>12</h3>
+          <h3>{dashboardData?.statusCounts?.COMPLETED || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -130,8 +213,8 @@ const Index = () => {
             boxSizing: "border-box",
           }}
         >
-          <h5>Total Sales</h5>
-          <h3>12</h3>
+          <h5>Total Cancelled Orders</h5>
+          <h3>{dashboardData?.statusCounts?.CANCELLED || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -142,8 +225,8 @@ const Index = () => {
             boxSizing: "border-box",
           }}
         >
-          <h5>Total Revenue</h5>
-          <h3>12</h3>
+          <h5>Total Returned Orders</h5>
+          <h3>{dashboardData?.statusCounts?.RETURNED || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -154,8 +237,8 @@ const Index = () => {
             boxSizing: "border-box",
           }}
         >
-          <h5>Active Customers</h5>
-          <h3>12</h3>
+          <h5>Total Refunded Orders</h5>
+          <h3>{dashboardData?.statusCounts?.REFUNDED || 0}</h3>
         </div>
         <div
           className="bg-light rounded justify-content-center"
@@ -166,8 +249,8 @@ const Index = () => {
             boxSizing: "border-box",
           }}
         >
-          <h5>Total Subscribers</h5>
-          <h3>12</h3>
+          <h5>Total Expired Orders</h5>
+          <h3>{dashboardData?.statusCounts?.EXPIRED || 0}</h3>
         </div>
 
         <div

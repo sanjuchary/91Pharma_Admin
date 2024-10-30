@@ -29,7 +29,7 @@ const Product = ({ categories, brands, subCategories }) => {
     context: Yup.string().required("Context is required"),
   });
 
-  console.log("subCategr", subCategories.data);
+  console.log("subCategr", brands.data);
 
   const values = [
     {

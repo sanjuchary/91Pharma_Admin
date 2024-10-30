@@ -27,9 +27,9 @@ const Product = ({ categories, brands, subCategories }) => {
     price: Yup.number().required("Price is required"),
   });
 
-  const [values, setValues] = useState([
+  const values = [
     {
-      name: "name",
+      name: "product_name",
       label: "Name",
       type: "text",
       placeholder: "Enter Product name",
@@ -376,7 +376,7 @@ const Product = ({ categories, brands, subCategories }) => {
       customClass: "col-md-6 col-12",
       value: "",
     },
-  ]);
+  ];
 
   return (
     //react hook form
@@ -388,7 +388,7 @@ const Product = ({ categories, brands, subCategories }) => {
         ]}
       />
 
-      <div className="d-flex mt-3">
+      {/* <div className="d-flex mt-3">
         <button
           className={`btn 
             ${tab === 0 ? "btn-dark" : "btn-outline-dark"}
@@ -409,7 +409,7 @@ const Product = ({ categories, brands, subCategories }) => {
         >
           Images
         </button>
-      </div>
+      </div> */}
 
       {/* {tab === 0 && id != undefined && ( */}
       <Form
@@ -418,11 +418,11 @@ const Product = ({ categories, brands, subCategories }) => {
         isMultiPart={true}
         api={{
           get: { method: "get", url: `/product/get-all?id=${id}` },
-          update: { method: "patch", url: `/products/${id}` },
+          // update: { method: "post", url: `/products/${id}` },
         }}
       />
       {/* )} */}
-      {tab === 1 && <Images id={id} images={images} />}
+      {/* {tab === 1 && <Images id={id} images={images} />} */}
     </div>
   );
 };

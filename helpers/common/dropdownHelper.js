@@ -3,7 +3,7 @@ import axios from "axios";
 const getOptions = async (tableName, label, val, isData) => {
   let selectListIdName = [];
   const arr = axios.get(
-    `${process.env.NEXT_PUBLIC_PROD_API_URL}` + `/${tableName}/get-all`,
+    `https://admin.91pharma.in/api/v1/${tableName}/get-all`,
     {
       headers: {
         Authorization: localStorage.getItem("token"),

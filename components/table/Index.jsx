@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types"; // For prop-types validation
 import Link from "next/link";
-import { Container, Row, Col, Card, CardBody, Button } from "reactstrap";
 import moment from "moment";
-import { useRouter } from "next/router";
 import { TableService } from "../../services/table";
-import Pagination from "./pagination";
+import Pagination from "./Pagination";
 import Limit from "./Limit";
+import { useRouter } from "next/router";
 
 const getNestedValue = (obj, path) => {
   return path?.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
-const Table = (props) => {
+const Table = ({ url, columns, buttons, loadingMessage, errorMessage }) => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [loading, setLoading] = useState(false); // For loading state
+  const [error, setError] = useState(null); // For error handling
   const [stats, setStats] = useState({
     total_rows: 0,
     total_pages: 0,
@@ -24,49 +26,46 @@ const Table = (props) => {
 
   const pathname = router.pathname;
 
-  const handleData = () => {
-    TableService(props.url, page, limit)
-      .then((res) => {
-        let response = res.data;
-        setStats({
-          total_rows: response.total_rows,
-          total_pages: response.total_pages,
-          current_page: response.current_page,
-        });
-        if (response?.message === "Applied Users For Credit Not Found") {
-          return setData([]);
-        }
-        setData(response.data);
-        console.log("response", response.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
+  const handleData = async () => {
+    setLoading(true);
+    setError(null); // Reset error on new data fetch
+
+    try {
+      const res = await TableService(url, page, limit);
+      let response = res.data;
+      setStats({
+        total_rows: response.total_rows,
+        total_pages: response.total_pages,
+        current_page: response.current_page,
       });
+      setData(response?.data || []);
+    } catch (err) {
+      setError("Error fetching data");
+      console.error("Error fetching data:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleValue = (item, column, index) => {
     const value = getNestedValue(item, column.dataField);
 
     if (column.type === "datetime") {
-      return moment(value).locale("en-gb").format("MMMM Do YYYY h:mm:ss a");
+      return moment(value).locale("en-gb").format("D-MMM-YYYY");
     } else if (column.type === "render") {
       return column.render(item);
     } else if (column.dataField === "serial_number") {
       return index + 1;
     } else if (column.dataField === "is_active") {
-      // Handle boolean value display
       return value ? "Yes" : "No";
     } else if (column.dataField === "due_amount") {
-      // Calculate due amount: sanction_amount - wallet_balance
       const sanctionAmount =
         parseFloat(getNestedValue(item, "sanction_amount")) || 0;
       const walletBalance =
         parseFloat(getNestedValue(item, "wallet_balance")) || 0;
       const dueAmount = sanctionAmount - walletBalance;
-
-      return dueAmount.toFixed(2); // Return due amount formatted to two decimal places
+      return dueAmount.toFixed(2);
     }
-
     return value;
   };
 
@@ -80,7 +79,15 @@ const Table = (props) => {
 
   useEffect(() => {
     handleData();
-  }, [page, limit]);
+  }, [page, limit, url]); // Include URL in dependency array in case it changes
+
+  if (loading) {
+    return <p>{loadingMessage || "Loading..."}</p>;
+  }
+
+  if (error) {
+    return <p>{errorMessage || error}</p>;
+  }
 
   return (
     <div className="common__table mt-5">
@@ -94,7 +101,7 @@ const Table = (props) => {
             out of {stats.total_rows || 0} rows ...
           </p>
           <div className="d-inline-flex">
-            {props.buttons.map((button, key) => (
+            {buttons.map((button, key) => (
               <Link key={key} href={button.url}>
                 <button
                   className={`btn btn-${button.color} btn-${button.size} px-3 me-2`}
@@ -109,7 +116,7 @@ const Table = (props) => {
           <table className="table table-borderless">
             <thead>
               <tr className="border-bottom">
-                {props.columns.map((column, key) => (
+                {columns.map((column, key) => (
                   <th className="fs-7" key={key}>
                     {column.text}
                   </th>
@@ -119,10 +126,11 @@ const Table = (props) => {
             <tbody>
               {pathname === "/a/categories" ||
               pathname === "/a/brands" ||
-              pathname === "/a/subCategories"
+              pathname === "/a/subCategories" ||
+              pathname === "/a/company"
                 ? data?.data?.map((item, itemKey) => (
                     <tr className="border-bottom" key={itemKey}>
-                      {props.columns.map((column, columnKey) => (
+                      {columns.map((column, columnKey) => (
                         <td key={columnKey}>
                           {handleValue(item, column, itemKey)}
                         </td>
@@ -131,7 +139,7 @@ const Table = (props) => {
                   ))
                 : data?.map((item, itemKey) => (
                     <tr className="border-bottom" key={itemKey}>
-                      {props.columns.map((column, columnKey) => (
+                      {columns.map((column, columnKey) => (
                         <td key={columnKey}>
                           {handleValue(item, column, itemKey)}
                         </td>
@@ -152,6 +160,32 @@ const Table = (props) => {
       </div>
     </div>
   );
+};
+
+Table.propTypes = {
+  url: PropTypes.string.isRequired,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      dataField: PropTypes.string,
+      text: PropTypes.string.isRequired,
+      type: PropTypes.string,
+      render: PropTypes.func,
+    })
+  ).isRequired,
+  buttons: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      size: PropTypes.string.isRequired,
+    })
+  ),
+  loadingMessage: PropTypes.string,
+  errorMessage: PropTypes.string,
+};
+
+Table.defaultProps = {
+  buttons: [],
 };
 
 export default Table;

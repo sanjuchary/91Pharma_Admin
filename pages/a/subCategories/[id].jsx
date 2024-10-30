@@ -3,12 +3,16 @@ import * as Yup from "yup";
 import BreadCrumb from "../../../components/BreadCrumb";
 import Form from "../../../components/form/update";
 import axios from "axios";
+import {
+  getOptions,
+  getDefaultValue,
+} from "../../../helpers/common/dropdownHelper";
 
-const SubCategory = ({ categories, subCategoryData }) => {
+const SubCategory = ({ defaultValue, options }) => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log("log", subCategoryData.category.name);
+  // console.log("log", subCategoryData.category.name);
 
   const schema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
@@ -20,7 +24,7 @@ const SubCategory = ({ categories, subCategoryData }) => {
       label: "Sub-Category Name",
       type: "text",
       placeholder: "Enter Sub-Category name",
-      value: subCategoryData?.name || "",
+      // value: subCategoryData?.name || "",
       customClass: "col-md-3 col-12",
     },
     {
@@ -29,11 +33,23 @@ const SubCategory = ({ categories, subCategoryData }) => {
       type: "select",
       placeholder: "Select Category",
       defaultValue: "NO",
-      value: "O",
-      options: categories.data, // Use the processed category options
-      isMulti: false,
+      value: "",
+      // options: options,
+      defaultValue: defaultValue,
+      // options: categories?.data, // Use the processed category options
+      // isMulti: false,
       customClass: "col-md-3 col-12",
     },
+    // {
+    //   name: "parent_id",
+    //   label: "Parent Brand",
+    //   type: "select",
+    //   placeholder: "Select parent brand",
+    //   value: "",
+    //   options: options,
+    //   defaultValue: defaultValue,
+    //   customClass: "col-md-3 col-12",
+    // },
     {
       name: "image",
       label: "Image",
@@ -115,6 +131,22 @@ export async function getServerSideProps(context) {
     };
   }
 }
+
+// export async function getServerSideProps(context) {
+//   const { id } = context.query;
+
+//   const [defaultValue, options] = await Promise.all([
+//     await getDefaultValue("category", "category", id),
+//     await getOptions("category", "name", "uuid", false),
+//   ]);
+
+//   return {
+//     props: {
+//       defaultValue: defaultValue,
+//       options: options,
+//     },
+//   };
+// }
 
 SubCategory.layout = "Admin";
 export default SubCategory;

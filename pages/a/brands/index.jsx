@@ -28,10 +28,19 @@ const Index = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [url, setUrl] = useState(`${API_URL}/brand/get-all`);
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  // Update the URL whenever the search term changes
+  useEffect(() => {
+    const searchQuery = searchTerm
+      ? `?is_active=true&search=${searchTerm}`
+      : "";
+    setUrl(`${API_URL}/brand/get-all${searchQuery}`);
+  }, [searchTerm]);
 
   const columns = [
     { dataField: "serial_number", text: "S.N." },
@@ -186,7 +195,8 @@ const Index = () => {
       </div>
       <Table
         columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`}
+        // url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/brand/get-all`}
+        url={url}
         buttons={buttons}
         title="Brands"
       />

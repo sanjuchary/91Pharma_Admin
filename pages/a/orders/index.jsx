@@ -202,7 +202,9 @@ const Index = () => {
       text: "Amount",
     },
     {
-      dataField: "Ordered date",
+      dataField: "createdAt",
+      type: "datetime",
+      value: "",
       text: "Ordered date",
     },
     {

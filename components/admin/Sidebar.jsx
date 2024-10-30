@@ -49,6 +49,22 @@ const Sidebar = (props) => {
       ],
     },
     {
+      name: "Companies",
+      icon: "bx bx-category",
+      url: "",
+      show: false,
+      items: [
+        {
+          name: "Add Companies",
+          url: "/a/company/create",
+        },
+        {
+          name: "Companies",
+          url: "/a/company",
+        },
+      ],
+    },
+    {
       name: "Categories",
       icon: "bx bx-category",
       url: "",

@@ -311,7 +311,7 @@ const Update = (props) => {
     props?.api?.get?.url && getData();
   }, []);
 
-  console.log("data_Sub", data.data);
+  console.log("data_Sub", data);
 
   return (
     <div>
@@ -340,7 +340,7 @@ const Update = (props) => {
             value.type === "select" ? (
               <div className={`form-group col-6 mt-2`} key={index}>
                 <label id={`form-element-${value.name}`}>{value.label}</label>
-                <Controller
+                {/* <Controller
                   name={value.name}
                   control={control}
                   render={({ field }) => (
@@ -367,6 +367,26 @@ const Update = (props) => {
                         } else {
                           field.onChange(e);
                         }
+                        value.isMulti === true
+                          ? setValue(
+                              value.name,
+                              JSON.stringify(e?.map((item) => item.value))
+                            )
+                          : setValue(value.name, e?.value);
+                      }}
+                    />
+                  )}
+                /> */}
+                <Controller
+                  name={value.name}
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      isMulti={value.isMulti}
+                      isClearable={true}
+                      defaultValue={value.defaultValue}
+                      options={value.options}
+                      onChange={(e) => {
                         value.isMulti === true
                           ? setValue(
                               value.name,

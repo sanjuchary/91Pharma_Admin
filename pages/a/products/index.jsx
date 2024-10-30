@@ -3,7 +3,7 @@ import BreadCrumb from "../../../components/BreadCrumb";
 import Table from "../../../components/table/Index";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SweetAlert from "../../../components/common/SweetAlert";
 
 const API_URL =
@@ -28,14 +28,22 @@ const Index = () => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [url, setUrl] = useState(
+    `${API_URL}/product/get-all?search=${searchTerm}`
+  );
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  // Update the URL whenever the search term changes
+  useEffect(() => {
+    console.log("search", searchTerm);
+    setUrl(`${API_URL}/product/get-all?search=${searchTerm}`);
+  }, [searchTerm]);
+
   const columns = [
     { dataField: "serial_number", text: "S.N." },
-
     {
       dataField: "name",
       text: "Name",
@@ -66,19 +74,38 @@ const Index = () => {
       text: "Updated At",
       type: "datetime",
     },
+    // {
+    //   dataField: null,
+    //   text: "Actions",
+    //   type: "render",
+    //   render: (item) => (
+    //     <div>
+    //       <Link href={`/a/products/${item.id}`}>
+    //         <a className="btn btn-dark btn-sm">View Details</a>
+    //       </Link>
+    //       <a
+    //         className="btn btn-dark btn-sm"
+    //         style={{ marginLeft: "10px" }}
+    //         onClick={() => handleDelete(item.id)}
+    //       >
+    //         Delete
+    //       </a>
+    //     </div>
+    //   ),
+    // },
     {
       dataField: null,
       text: "Actions",
       type: "render",
       render: (item) => (
         <div>
-          <Link
-            href={{
-              pathname: "/a/products/[id]",
-              query: { id: item.id },
-            }}
-          >
-            <a className="btn btn-dark btn-sm">View Details</a>
+          {/* <Link href={`/a/categories/${item.id}`}>
+            <a className="btn btn-dark btn-sm">View Sub Categories</a>
+          </Link> */}
+          <Link href={`/a/products/${item.id}`}>
+            <a className="btn btn-dark btn-sm" style={{ marginLeft: "10px" }}>
+              View Details
+            </a>
           </Link>
           <a
             className="btn btn-dark btn-sm"
@@ -118,14 +145,12 @@ const Index = () => {
           res?.data?.message || "Deleted Successfully",
           "success"
         );
-        console.log(res);
         setTimeout(() => {
           router.reload();
         }, 2000);
       })
       .catch((err) => {
         handleSweetAlert(true, "Error", err?.response?.data?.message, "error");
-        console.log(err);
       });
   };
 
@@ -183,14 +208,10 @@ const Index = () => {
           />
         </div>
       </div>
-      <Table
-        columns={columns}
-        url={`${process.env.NEXT_PUBLIC_PROD_API_URL}/product/get-all`}
-        buttons={buttons}
-        title="Products"
-      />
+      <Table columns={columns} url={url} buttons={buttons} title="Products" />
     </div>
   );
 };
+
 Index.layout = "Admin";
 export default Index;
